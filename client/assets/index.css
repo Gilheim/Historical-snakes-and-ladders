@@ -1,0 +1,51 @@
+:root {
+  --throw-height: 80px;
+}
+
+#dice-container {
+  height: 250px;
+  width: 250px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+@keyframes dice-throw {
+  50% {
+    translate: 0 calc(-1 * var(--throw-height));
+  }
+  100% {
+    transform: rotate(360deg);
+    translate: 0px;
+  }
+}
+
+.dice-throw {
+  animation-name: dice-throw;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+}
+
+#dice {
+  margin-top: var(--throw-height);
+  height: 100%;
+  width: 100%;
+
+  background-color: transparent;
+  border: none;
+
+  cursor: pointer;
+}
+
+#dice-throw-info {
+    opacity: 1;
+    transition-duration: 1s;
+    transition-property: all;
+    transition-timing-function: ease-out;
+}
+
+#dice-throw-info[data-thrown=true] {
+    opacity: 0;
+    transform: translateY(40%);
+    transition-timing-function: ease-in;
+}
