@@ -4,9 +4,9 @@ const createPlayers = () => {
   const formQueryString = window.location.search;
   const playerNames = [...new URLSearchParams(formQueryString).values()];
 
+  //remove white spaces and player name values that are empty
   const playersPlaying = playerNames.map((name) => name.trim()).filter(Boolean);
 
-  console.log(playersPlaying);
   for (let name of playersPlaying) {
     //player object format
     const playerObj = {
