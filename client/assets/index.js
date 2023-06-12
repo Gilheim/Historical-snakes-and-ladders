@@ -19,11 +19,22 @@ async function fetchGrid() {
 }
 
 const displayGrid = (grid) => {
-    console.log(grid.grid.length)
-    for(i=0; i< grid.grid.length; i++){
-        const button = document.createElement("button")
-        button.textContent = grid.grid[i].index + 1
-        body.appendChild(button)
+    const table = document.createElement("table")
+    body.appendChild(table)
+    for(i=7;i>= 0;i--){
+        let row = document.createElement("tr")
+        row.id = "row " + i.toString()
+        table.appendChild(row)
+    }
+    for(i = grid.grid.length - 1 ; i >= 0; i--){
+        let td = document.createElement("td")
+        td.textContent = grid.grid[i].index + 1
+        let rowNumber = Math.floor(i/8)
+        if(rowNumber%2 == 1){
+            document.getElementById("row " + rowNumber).append(td)
+        } else {
+            document.getElementById("row " + rowNumber).prepend(td)
+        }
         
     }
     
