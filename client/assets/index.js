@@ -96,6 +96,12 @@ const createPlayerHTMLElements = () => {
     const playerDiv = document.createElement("div");
     playerDiv.id = playerId;
 
+    //add dedicated image to board piece div
+    const boardPieceImage = document.createElement("img");
+    boardPieceImage.src = `./assets/images/board-pieces/${playerId}.svg`;
+    boardPieceImage.alt = `player ${i + 1}'s board piece`;
+    playerDiv.appendChild(boardPieceImage);
+
     playerDiv.classList.add("board-piece");
 
     boardGrid.appendChild(playerDiv);
