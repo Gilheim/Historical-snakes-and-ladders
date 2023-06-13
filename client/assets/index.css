@@ -8,6 +8,13 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
   }
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
   
   h1 {
     background-color: #348A9D;
