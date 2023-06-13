@@ -9,7 +9,18 @@
     <title>Historical Snakes and Ladders</title>
 </head>
 <body>
-    <button class="test">acquire grid</button>
-    
+    <button class="test">acquire grid</button>     
+    <div id="dice-container">
+        <h2 class="throw-prompt">Click on the dice to throw it!</h2>
+        <button id="dice">
+            <img src="./assets/images/dice/1.svg" alt="value of 1 on die">
+        </button>
+        <h2 id="dice-throw-info"></h2>
+    </div>
+    <!-- test board to check "movePiece" functionality -->
+    <table id="board-grid">
+        <tr><td id="square-1"></td><td id="square-2"></td></tr>
+        <tr><td id="square-3"></td><td id="square-4"></td></tr>
+    </table>
 </body>
 </html>
