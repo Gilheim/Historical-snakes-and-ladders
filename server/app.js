@@ -45,6 +45,13 @@ app.get('/grids/:id', (req, res) => {
     }
 })
 
+app.post("/grids", (req, res) => {
+    const newGrid = req.body
+    console.log(newGrid)
+    grids.push(newGrid)
+    res.status(201).send(newGrid);
+})
+
 
 
 
