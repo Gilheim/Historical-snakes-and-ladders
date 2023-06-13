@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./assets/index.js" defer></script>
+    <link rel="stylesheet" href="./assets/game-setup.css">
+    <title>Game Setup</title>
+</head>
+<body>
+    <div class="boards">
+        <button>Board 1</button>
+        <button>Board 2</button>
+        <button>Board 3</button>
+        <button>Board 4</button>
+    </div>
+    <div>
+        <h1>Enter Player Names</h1>
+    <form id="player-form" action="index.html">
+        <input name="player1" type="text" class="player-name" placeholder="Player 1">
+        <input name="player2" type="text" class="player-name" placeholder="Player 2">
+        <input name="player3" type="text" class="player-name" placeholder="Player 3">
+        <input name="player4" type="text" class="player-name" placeholder="Player 4">
+        <button class="submit" type="submit">Start game</button>
+    </div>
+    </form>
+    <script>
+    const buttons = document.querySelectorAll('.boards button');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            buttons.forEach(btn => btn.classList.remove('clicked'));
+            button.classList.add('clicked');
+        });
+    });
+    </script>
+</body>
+</html>
