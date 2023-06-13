@@ -55,7 +55,7 @@ const createPlayers = () => {
     //player object format
     const playerObj = {
       name,
-      currentSquare: 0,
+      currentSquare: 1,
     };
     players.push(playerObj);
   }
@@ -112,6 +112,49 @@ const createPlayerHTMLElements = () => {
 
 createPlayerHTMLElements();
 
+const gameStatusDiv = document.getElementById("game-status");
+const updateGameStatus = () => {
+  //clear div first if any content is inside
+  gameStatusDiv.innerHTML = "";
+
+  const playerContainers = [];
+  for (let playerObj of players) {
+    
+    const playerContainer = document.createElement('div');
+    const nameContainer = document.createElement('div');
+
+    //add dedicated image to name div
+    const boardPieceImage = document.createElement("img");
+    boardPieceImage.src = `./assets/images/board-pieces/${playerObj.id}.svg`;
+    boardPieceImage.alt = `${playerObj.id}'s board piece symbol`;
+
+    nameContainer.appendChild(boardPieceImage);
+
+    const nameDiv = document.createElement('h2');
+    nameDiv.textContent = playerObj.name;
+
+    nameContainer.appendChild(nameDiv);
+
+    playerContainer.appendChild(nameContainer);
+
+    const currentSquareDiv = document.createElement('div');
+    currentSquareDiv.textContent = playerObj.currentSquare;
+
+    playerContainer.appendChild(currentSquareDiv);
+
+    playerContainers.push(playerContainer);
+  }
+
+  playerContainers.forEach((playerContainer) => gameStatusDiv.appendChild(playerContainer));
+
+  const gamePromptDiv = document.createElement("div");
+  const gameMessage = `It's ${players[currentPlayer].name}" turn to throw now`;
+  gamePromptDiv.textContent = gameMessage;
+
+  gameStatusDiv.appendChild(gamePromptDiv);
+}
+
+updateGameStatus();
 // console.log(players);
 
 const diceButton = document.getElementById("dice");
@@ -139,7 +182,7 @@ const throwDice = async () => {
   diceButton.disabled = false;
   diceThrowInfo.dataset.thrown = false;
 
-  diceThrowInfo.textContent = `"${players[currentPlayer].name}" threw a value of ${randValue1to6}`;
+  diceThrowInfo.textContent = `${players[currentPlayer].name} threw a value of ${randValue1to6}`;
 
   //update current players position on the grid using random value
   const playerObj = players[currentPlayer];
@@ -148,10 +191,14 @@ const throwDice = async () => {
   // use recently updated current square of player to move player piece to the correct position on the board
   const pieceId = playerObj.id;
   const squareId = `square-${playerObj.currentSquare}`;
-  movePiece(pieceId, squareId)
+  // movePiece(pieceId, squareId)
+
+  // await new Promise((resolve) => setTimeout(resolve, 3000));
 
   //update the current player next to throw the dice
   currentPlayer = (currentPlayer + 1) % players.length;
+
+  updateGameStatus();
 };
 
 diceButton.addEventListener("click", throwDice);
