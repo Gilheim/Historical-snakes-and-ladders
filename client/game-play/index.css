@@ -49,6 +49,7 @@ body {
   row-gap: 20px;
 }
 
+#question-outer-container,
 #end-game,
 #side-panel,
 #board > * {
@@ -73,20 +74,19 @@ body {
   color: whitesmoke;
 }
 
-#board-grid {
+#board-grid-container {
   position: relative;
-  border-spacing: 7px;
   transform: scaleY(-1);
 }
 
+#board-grid {
+  border-spacing: 7px;
+}
+
 #board-grid td {
-  border: solid black 1px;
-
   font-size: 3.5vw;
-
   width: 1em;
   height: 1em;
-
   background-image: url("/client/assets/images/cream-coloured-wood-texture.jpg");
   background-repeat: no-repeat;
   background-size: contain;
@@ -95,12 +95,15 @@ body {
 .board-piece {
   display: grid;
   position: absolute;
-  height: max-content;
   width: 2.3vw;
   transform: scaleY(-1);
   transition-property: left, top;
-  transition-duration: 3s;
+  transition-duration: 2.5s;
   transition-timing-function: ease-in-out;
+}
+
+.board-piece img {
+    width: 2.3vw;
 }
 
 #side-panel {
@@ -131,7 +134,6 @@ body {
 }
 
 #player-status td {
-  border-color: black;
   text-align: center;
   border: 2px solid;
 }
@@ -151,6 +153,7 @@ body {
   display: grid;
   place-items: center;
   color: white;
+  text-align: center;
 }
 
 #dice-container {
@@ -200,6 +203,80 @@ body {
   cursor: pointer;
 }
 
+#question-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000a1;
+
+    display: grid;
+    place-items: center;
+}
+
+#question-outer-container {
+    display: grid;
+    place-items: center;
+    height: 50%;
+    width: 30%;
+}
+
+#question-inner-container {
+    display: grid;
+    place-items: center;
+    row-gap: 30px;
+    height: 80%;
+    width: 80%;
+    color: white;
+}
+
+#question {
+    display: grid;
+    text-align: center;
+}
+#question > * {
+    margin: 0;
+}
+
+#answers-container {
+    place-self: stretch;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+#answer-button {
+    background-color: transparent;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    border-color: #362419;
+    font-size: 16px;
+    color: white;
+    border-width: 5px;
+    border-style: outset;
+}
+
+#answer-button:hover {
+    color: gold;
+    border-style: inset;
+}
+
+#question-info {
+    table-layout: fixed;
+    width: 100%;
+    place-self: stretch;
+    border-collapse: collapse;
+}
+
+#question-info td,
+#question-info th {
+    padding: 5px;
+    border: 1px solid white;
+    text-align: center;
+}
+
 @media screen and (max-width: 1400px) {
   body {
     place-items: center;
@@ -208,6 +285,13 @@ body {
   #game-container {
     grid-template-columns: 1fr;
   }
+
+  #question-outer-container {
+    display: grid;
+    place-items: center;
+    height: 50%;
+    width: 70%;
+}
 
   #board-grid td {
     width: 2.2em;
