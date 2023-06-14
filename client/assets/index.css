@@ -222,3 +222,56 @@ body {
     margin-right: 70px;
   }
 }
+  
+/* Edit Board */
+.empty-square {
+    font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
+    border-color: black;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border: 2px solid
+}
+
+.square-question {
+  font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
+  border-color: black;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: 2px solid;
+  background-color: red;
+}
+
+#questionform {
+  display: flex;
+  flex-direction: column;
+}
+
+#form-buttons{
+  display: flex;
+}
+
+#gridform {
+  display:flex;
+  flex-direction: column;
+}
+
+.edit-square {
+  font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
+  border-color: black;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: 2px solid;
+  background-color: turquoise;
+}
+
+#formcontainer{
+  display:flex;
+  flex-direction: column;
+}
+
+#board-and-form{
+  display: flex;
+}
