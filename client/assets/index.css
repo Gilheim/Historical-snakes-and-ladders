@@ -26,7 +26,7 @@ body {
   font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
   border-color: black;
   width: 40px;
-  height: 40px;
+  height: 40px; 
   text-align: center;
   border: 2px solid;
   background-color: red;
@@ -50,7 +50,7 @@ body {
   font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
   border-color: black;
   width: 40px;
-  height: 40px;
+  height: 40px; 
   text-align: center;
   border: 2px solid;
   background-color: turquoise;
@@ -62,20 +62,21 @@ body {
 }
 
 #board-and-form{
-  display: flex;
+  display: flex ;
 }
 
 
 #editpage {
   background-color: white;
   background-image: none;
+  display: inline-block
 }
 
 /* Dropdown Button */
 .dropbtn {
   background-color: #04AA6D;
   color: white;
-  padding: 16px;
+  padding: 5px;
   font-size: 16px;
   border: none;
 }

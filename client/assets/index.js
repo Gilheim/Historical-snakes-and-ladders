@@ -1,6 +1,7 @@
 window.onload = () => {
-    let realGridName = "blank grid"
+    let realGridName = window.location.hash.substr(1)
     fullEditForm(realGridName)
+    createDropdownMenu()
 }
 
 const section = document.querySelector("section")
@@ -136,6 +137,7 @@ async function fullEditForm(name) {
         if (response.status == 201) {
             e.target.boardname.value = ''
             alert("Grid added.")
+            location.reload()
         }
 
 
@@ -216,3 +218,36 @@ class Question {
         this.penalty = penalty
     }
 }
+
+async function createDropdownMenu() {
+    try {
+        const gridData = await fetch(`http://localhost:3000/grids/names`)
+        if (gridData.ok) {
+            const data = await gridData.json()
+            let dropdownMenu = document.querySelector(".dropdown-content")
+            for(i=0; i< data.length; i++){
+                let menuItem = document.createElement("a")
+                menuItem.textContent = data[i]
+                menuItem.href = `http://127.0.0.1:5500/client/edit-board.html#${data[i]}`
+                dropdownMenu.appendChild(menuItem)
+                menuItem.addEventListener("click", goToPage)
+            }
+        } else {
+            throw "Something went wrong with the API request"
+        }
+    } catch(e) {
+        console.log(e)
+    }
+}
+
+const goToPage = (e) => {
+    window.location = e.target.href
+    location.reload()
+}
+
+
+
+
+
+
+
