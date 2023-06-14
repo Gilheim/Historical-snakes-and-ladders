@@ -209,12 +209,6 @@ const displayGrid = (grid) => {
     } 
 }
 
-
-
-
-
-
-
 class Question {
     constructor (question, answers, correctAnswerIndex, reward, penalty) {
         this.question = question,
@@ -224,6 +218,8 @@ class Question {
         this.penalty = penalty
     }
 }
+
+
 
 /* Game Play Page Functions */
 
