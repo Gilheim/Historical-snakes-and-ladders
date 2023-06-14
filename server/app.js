@@ -35,6 +35,14 @@ const createGrid = (gridName) => {
 
 //createGrid("Blank Grid")
 
+app.get('/grids/names', (req,res) => {
+    let gridNames = []
+    for(i=0;i<grids.length;i++){
+        gridNames.push(grids[i].name)
+    }
+    res.send(gridNames)
+})
+
 app.get('/grids/:id', (req, res) => {
     const gridName = req.params.id.toLowerCase()
     const grid = grids.find((element) => element.name.toLowerCase() == gridName)
@@ -43,6 +51,12 @@ app.get('/grids/:id', (req, res) => {
     } else {
         res.status(404).send()
     }
+})
+
+app.post("/grids", (req, res) => {
+    const newGrid = req.body
+    grids.push(newGrid)
+    res.status(201).send(newGrid);
 })
 
 

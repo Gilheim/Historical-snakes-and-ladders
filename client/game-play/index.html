@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./index.js" defer></script>
+    <link rel="stylesheet" href="./index.css">
+    <title>Historical Snakes and Ladders</title>
+</head>
+<body>
+    <button id="end-game" onclick = "window.location.href='';">
+        End Game
+    </button>
+    <main id="game-container">
+        <section id="side-panel">
+            <div id="game-message"></div>
+            <div id="player-status-container">
+                <table id="player-status"></table>
+            </div>
+            <div id="dice-container">
+                <button id="dice">
+                    <img src="./../assets/images/dice/1.svg" alt="value of 1 on die">
+                </button>
+            </div>
+        </section>
+
+        <div id="outer-board-container">
+            <section id="board">
+                <div>
+                    <h1 id="board-name">Nothing at this point in time</h1>
+                </div>
+                <table id="board-grid"></table>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
