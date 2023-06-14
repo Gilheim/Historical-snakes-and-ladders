@@ -94,9 +94,7 @@ createPlayers();
  */
 function movePiece(pieceId, squareId) {
   const pieceElem = document.getElementById(pieceId);
-    const squareElem = document.getElementById(squareId);
-    
-    console.log(squareElem);
+  const squareElem = document.getElementById(squareId);
 
   const squareCenterPosInGrid = {};
   squareCenterPosInGrid.xPos =
@@ -108,7 +106,7 @@ function movePiece(pieceId, squareId) {
     squareCenterPosInGrid.xPos - pieceElem.offsetWidth / 2 + "px";
   pieceElem.style.top =
     squareCenterPosInGrid.yPos - pieceElem.offsetHeight / 2 + "px";
-};
+}
 
 const boardGridContainer = document.getElementById("board-grid-container");
 const createPlayerHTMLElements = () => {
@@ -348,10 +346,23 @@ async function checkAnswer(event, questionObj) {
 
   await new Promise((resolve) => setTimeout(resolve, 2500));
 
+  await checkForWinner();
   //update the current player next to throw the dice
   currentPlayer = (currentPlayer + 1) % players.length;
 
   updatePlayerStatus();
   updateGameMessage(`It's ${players[currentPlayer].name}'s turn to throw now`);
+
+  checkForWinner();
   diceButton.disabled = false;
+}
+
+async function checkForWinner() {
+  const player = players[currentPlayer];
+  console.log(player.currentSquare);
+  if (player.currentSquare >= 64) {
+      updateGameMessage(`${player.name} has won`);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      history.back();
+  }
 }
