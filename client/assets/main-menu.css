@@ -1,0 +1,86 @@
+body {
+    background-color: #9C4734;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+  
+  h1 {
+    background-color: #348A9D;
+    color: #fff;
+    text-align: center;
+    font-size: 44px;
+    border-radius: 4px;
+    width: 634px;
+    height: 108px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 37px;
+  }
+  
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .button {
+    display: inline-block;
+    font-size: 24px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border 0.1s;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  #create-board,
+  #edit-board {
+    background-color: #FF9901;
+    color: #000;
+    order: 1;
+    width: 247px;
+    height: 108px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 19px;
+  }
+  
+  #start-game {
+    background-color: #2B9805;
+    color: #fff;
+    order: 2;
+    width: 247px;
+    height: 108px;
+    margin-top: 37px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#start-game:hover,
+#edit-board:hover,
+#create-board:hover {
+  border: 4px solid #000;
+}
+
+  
