@@ -1,116 +1,224 @@
-:root {
-  --throw-height: 80px;
+* {
+  font-family: "Arial", Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  background-image: url("./images/history-wallpaper.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#game-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  column-gap: 70px;
+  margin: 38px;
+}
+
+#end-game {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  padding: 6px;
+  border-width: 5px !important;
+}
+
+#end-game:hover {
+  color: red;
+}
+
+#outer-board-container {
+  display: grid;
+  place-items: center;
+  margin: 70px;
+  margin-left: 0;
+}
+
+#board {
+  display: grid;
+  place-items: center;
+  grid-auto-rows: min-content;
+  row-gap: 20px;
+}
+
+#end-game,
+#side-panel,
+#board > * {
+  background-image: url("./images/wood-background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  border-radius: 5px;
+  border-color: #362419;
+  border-width: 10px;
+  border-style: groove;
+}
+
+#board > div {
+  place-self: stretch;
+  display: grid;
+  place-items: center;
+}
+
+#board h1 {
+  color: whitesmoke;
+}
+
+#board-grid {
+  position: relative;
+  border-spacing: 7px;
+  transform: scaleY(-1);
+}
+
+#board-grid td {
+  border: solid black 1px;
+
+  font-size: 3.5vw;
+
+  width: 1em;
+  height: 1em;
+
+  background-image: url("./images/cream-coloured-wood-texture.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.board-piece {
+  display: grid;
+  position: absolute;
+  height: max-content;
+  width: 2.3vw;
+  transform: scaleY(-1);
+  transition-property: left, top;
+  transition-duration: 3s;
+  transition-timing-function: ease-in-out;
+}
+
+#side-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.5fr 1fr;
+  margin: 70px;
+  margin-right: 0;
+  padding: 40px;
+  gap: 30px;
+}
+
+#side-panel > * {
+  border-radius: 5px;
+  border-color: #362419;
+  border-width: 5px;
+  border-style: outset;
+}
+
+#player-status-container {
+  place-self: stretch;
+  display: grid;
+  color: white;
+  padding: 10px;
+}
+
+#player-status {
+}
+
+#player-status td {
+  border-color: black;
+  text-align: center;
+  border: 2px solid;
+}
+
+#player-status img {
+  width: 50px;
+  padding: 10px;
+}
+
+#player-status tr > td:first-of-type {
+  width: 40px;
+}
+
+#game-message {
+  grid-column: span 2;
+  font-size: 36px;
+  display: grid;
+  place-items: center;
+  color: white;
 }
 
 #dice-container {
-  height: 250px;
-  width: 250px;
   display: grid;
   place-items: center;
-  text-align: center;
 }
 
-@keyframes dice-throw {
+@keyframes toss {
+  15% {
+    transform: scale(0.3);
+    translate: 0 50%;
+  }
   50% {
-    translate: 0 calc(-1 * var(--throw-height));
+    transform: scale(0.3);
+    translate: 0 -50%;
+  }
+  85% {
+    transform: scale(0.3);
+    translate: 0 50%;
   }
   100% {
-    transform: rotate(360deg);
+    transform: scale(1);
     translate: 0px;
   }
 }
 
+@keyframes spin {
+  from {
+    transform: scale(0.3) rotate(0deg);
+  }
+  to {
+    transform: scale(0.3) rotate(720deg);
+  }
+}
+
 .dice-throw {
-  animation-name: dice-throw;
-  animation-duration: 2s;
+  animation-name: toss, spin;
+  animation-duration: 2s, 1.4s;
+  animation-delay: 0s, 0.3s;
   animation-timing-function: ease-in-out;
 }
 
 #dice {
-  margin-top: var(--throw-height);
-  height: 100%;
-  width: 100%;
-
+  width: 70%;
   background-color: transparent;
   border: none;
-
   cursor: pointer;
 }
 
-#dice-throw-info {
-    opacity: 1;
-    transition-duration: 1s;
-    transition-property: all;
-    transition-timing-function: ease-out;
-}
+@media screen and (max-width: 1400px) {
+  body {
+    place-items: center;
+  }
 
-#dice-throw-info[data-thrown=true] {
-    opacity: 0;
-    transform: translateY(40%);
-    transition-timing-function: ease-in;
-}
+  #game-container {
+    grid-template-columns: 1fr;
+  }
 
-#board-grid {
-  position: fixed;
-  border: 1px solid black;
-  right: 0;
-  top: 0;
-  width: 800px;
-  height: 800px;
-}
+  #board-grid td {
+    width: 2.2em;
+    height: 2.2em;
+  }
 
-#board-grid td {
-  position: relative;
-  border: 1px solid black;
-}
+  #outer-board-container {
+    margin-left: 70px;
+  }
 
-.board-piece {
-  height: 100%;
-  width: 50px;
-  position: absolute;
-
-  transition: 3s all ease-in-out;
-}
-
-#game-status {
-  width: 600px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-#game-status img{
-  width: 50px;
-  padding: 10px;
-
-}
-
-#game-status,
-#game-status div {
-  place-items: center;
-}
-
-
-#game-status > div {
-  display: grid;
-  grid-template-columns: 1fr min-content;
-}
-
-#game-status > div > div {
-  display: grid;
-  grid-auto-flow: column;
-}
-
-#game-status > div:last-child {
-  grid-column: span 2;
-}
-
-
-td {
-    font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
-    border-color: black;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    border: 2px solid
-
+  #side-panel {
+    margin-right: 70px;
+  }
 }
