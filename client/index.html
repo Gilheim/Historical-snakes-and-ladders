@@ -8,19 +8,31 @@
     <link rel="stylesheet" href="./assets/index.css">
     <title>Historical Snakes and Ladders</title>
 </head>
-<body> 
-    <div id="dice-container">
-        <h2 class="throw-prompt">Click on the dice to throw it!</h2>
-        <button id="dice">
-            <img src="./assets/images/dice/1.svg" alt="value of 1 on die">
-        </button>
-        <h2 id="dice-throw-info"></h2>
-    </div>
-    <!-- test board to check "movePiece" functionality -->
-    <!-- <table id="board-grid">
-        <tr><td id="square-1"></td><td id="square-2"></td></tr>
-        <tr><td id="square-3"></td><td id="square-4"></td></tr>   
-    </table> -->
-    <button class="test">acquire grid</button> 
+<body>
+    <button id="end-game" onclick = "window.location.href='';">
+        End Game
+    </button>
+    <main id="game-container">
+        <section id="side-panel">
+            <div id="game-message"></div>
+            <div id="player-status-container">
+                <table id="player-status"></table>
+            </div>
+            <div id="dice-container">
+                <button id="dice">
+                    <img src="./assets/images/dice/1.svg" alt="value of 1 on die">
+                </button>
+            </div>
+        </section>
+
+        <div id="outer-board-container">
+            <section id="board">
+                <div>
+                    <h1 id="board-name">Nothing at this point in time</h1>
+                </div>
+                <table id="board-grid"></table>
+            </section>
+        </div>
+    </main>
 </body>
 </html>
