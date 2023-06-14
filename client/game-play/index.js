@@ -46,7 +46,7 @@ const createPlayersAndBoard = () => {
 
   boardName = "test grid";
   const playerNames = formValues;
-  formValues.pop()
+  formValues.pop();
   //remove white spaces and player name values that are empty
   const playersPlaying = playerNames.map((name) => name.trim()).filter(Boolean);
 
@@ -86,7 +86,7 @@ function movePiece(pieceId, squareId) {
 }
 
 const boardGridContainer = document.getElementById("board-grid-container");
-const createPlayerHTMLElements = () => {
+const createPlayerHTMLElements = async () => {
   for (let i = 0; i < players.length; i++) {
     const playerId = `player${i}`;
     const playerObj = players[i];
@@ -94,10 +94,11 @@ const createPlayerHTMLElements = () => {
     playerObj.id = playerId;
     const playerDiv = document.createElement("div");
     playerDiv.id = playerId;
+    playerDiv.classList.add("board-piece");
 
     //add dedicated image to board piece div
     const boardPieceImage = document.createElement("img");
-    boardPieceImage.src = `./../assets/images/board-pieces/${playerId}.svg`;
+    boardPieceImage.src = `./../assets/images/board-pieces/${playerId}.png`;
     boardPieceImage.alt = `player ${i + 1}'s board piece`;
 
     playerDiv.appendChild(boardPieceImage);
@@ -105,8 +106,6 @@ const createPlayerHTMLElements = () => {
     boardGridContainer.appendChild(playerDiv);
 
     movePiece(playerId, "square-1");
-
-    playerDiv.classList.add("board-piece");
   }
 
   updateGameMessage(
@@ -138,7 +137,7 @@ const updatePlayerStatus = () => {
 
     //add dedicated image to name div
     const boardPieceImage = document.createElement("img");
-    boardPieceImage.src = `./../assets/images/board-pieces/${playerObj.id}.svg`;
+    boardPieceImage.src = `./../assets/images/board-pieces/${playerObj.id}.png`;
     boardPieceImage.alt = `${playerObj.name}'s board piece image`;
     pieceImageCell.appendChild(boardPieceImage);
     playerRow.appendChild(pieceImageCell);
@@ -220,10 +219,12 @@ function checkAndLoadQuestion() {
 
   if (!boardInfoElem) {
     //update the current player next to throw the dice
-      currentPlayer = (currentPlayer + 1) % players.length;
-      updateGameMessage(`It's ${players[currentPlayer].name}'s turn to throw now`);
-      diceButton.disabled = false;
-      console.log(currentPlayer)
+    currentPlayer = (currentPlayer + 1) % players.length;
+    updateGameMessage(
+      `It's ${players[currentPlayer].name}'s turn to throw now`
+    );
+    diceButton.disabled = false;
+    console.log(currentPlayer);
     return;
   }
 

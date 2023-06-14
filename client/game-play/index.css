@@ -85,17 +85,18 @@ body {
 
 #board-grid td {
   font-size: 3.5vw;
-  width: 1em;
-  height: 1em;
+  width: 1.015em;
+  height: 1.015em;
   background-image: url("/client/assets/images/cream-coloured-wood-texture.jpg");
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .board-piece {
-  display: grid;
   position: absolute;
-  width: 2.3vw;
+  font-size: 3vw;
+  width: 1.015em;
+  height: 1.015em;
   transform: scaleY(-1);
   transition-property: left, top;
   transition-duration: 2.5s;
@@ -103,7 +104,7 @@ body {
 }
 
 .board-piece img {
-    width: 2.3vw;
+    width: 100%;
 }
 
 #side-panel {
