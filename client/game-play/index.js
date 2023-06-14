@@ -1,51 +1,24 @@
 const gameMessageContainer = document.getElementById("game-message");
 
-const boardInfo = {
-  name: "test grid",
-  grid: [
-    {
-      index: 0,
-      question: {
-        question: "which answer is right?",
-        answers: ["wrong", "wrong", "right", "wrong"],
-        correctAnswerIndex: 2,
-        reward: 3,
-        penalty: 0,
-      },
-    },
-    {
-      index: 1,
-      question: {
-        question: "Which is the best teamname?",
-        answers: [
-          "ctrl-alt-elite",
-          "binary bananas",
-          "I can't remember",
-          "I can't remember",
-        ],
-        correctAnswerIndex: 0,
-        reward: 55,
-        penalty: 55,
-      },
-    },
-  ],
-};
+let boardInfo = {};
+let boardName = "";
 
 const boardGrid = document.getElementById("board-grid");
 
-// async function fetchGrid() {
-//     try {
-//         const gridData = await fetch(`http://localhost:3000/grids/${gridButton.name}`)
-//         if (gridData.ok) {
-//             const data = await gridData.json()
-//             displayGrid(data)
-//         } else {
-//             throw "Something went wrong with the API request"
-//         }
-//     } catch(e) {
-//         console.log(e)
-//     }
-// }
+async function fetchGrid() {
+  try {
+    const gridData = await fetch(`http://localhost:3000/grids/${boardName}`);
+    if (gridData.ok) {
+      const data = await gridData.json();
+      data.grid = data.grid.filter((boardInfoElem) => boardInfoElem.question);
+      boardInfo = data;
+    } else {
+      throw "Something went wrong with the API request";
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 const displayGrid = () => {
   let cellCount = 1;
@@ -67,10 +40,13 @@ let players = [];
 // a value from 0 to 3 dictating which player is next to throw
 let currentPlayer = 0;
 
-const createPlayers = () => {
+const createPlayersAndBoard = () => {
   const formQueryString = window.location.search;
-  const playerNames = [...new URLSearchParams(formQueryString).values()];
+  const formValues = [...new URLSearchParams(formQueryString).values()];
 
+  boardName = "test grid";
+  const playerNames = formValues;
+  formValues.pop()
   //remove white spaces and player name values that are empty
   const playersPlaying = playerNames.map((name) => name.trim()).filter(Boolean);
 
@@ -82,9 +58,10 @@ const createPlayers = () => {
     };
     players.push(playerObj);
   }
+  fetchGrid();
 };
 
-createPlayers();
+createPlayersAndBoard();
 
 /**
  * Takes the id of a player piece and a square and places piece centered within square
@@ -234,14 +211,21 @@ diceButton.addEventListener("click", throwDice);
 
 function checkAndLoadQuestion() {
   const playerObj = players[currentPlayer];
-  //   const playerCurrentSquare = playerObj.currentSquare;
+  const playerCurrentSquare = playerObj.currentSquare;
   const boardInfoElems = boardInfo.grid;
 
   const boardInfoElem = boardInfoElems.find(
-    (boardInfoElem) => boardInfoElem.index === 1
+    (boardInfoElem) => boardInfoElem.index === playerCurrentSquare
   );
 
-  if (!boardInfoElem) return;
+  if (!boardInfoElem) {
+    //update the current player next to throw the dice
+      currentPlayer = (currentPlayer + 1) % players.length;
+      updateGameMessage(`It's ${players[currentPlayer].name}'s turn to throw now`);
+      diceButton.disabled = false;
+      console.log(currentPlayer)
+    return;
+  }
 
   const questionObj = boardInfoElem.question;
   createQuestionPopUp(questionObj);
@@ -346,7 +330,6 @@ async function checkAnswer(event, questionObj) {
 
   await new Promise((resolve) => setTimeout(resolve, 2500));
 
-  await checkForWinner();
   //update the current player next to throw the dice
   currentPlayer = (currentPlayer + 1) % players.length;
 
@@ -359,10 +342,9 @@ async function checkAnswer(event, questionObj) {
 
 async function checkForWinner() {
   const player = players[currentPlayer];
-  console.log(player.currentSquare);
   if (player.currentSquare >= 64) {
-      updateGameMessage(`${player.name} has won`);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      history.back();
+    updateGameMessage(`${player.name} has won`);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    history.back();
   }
 }
