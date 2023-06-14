@@ -9,11 +9,11 @@
     <title>Historical Snakes and Ladders</title>
 </head>
 <body>
-    <button id="end-game" onclick = "window.location.href='';">
-        End Game
-    </button>
     <main id="game-container">
         <section id="side-panel">
+            <button id="end-game" onclick="history.back();">
+                End Game
+            </button>
             <div id="game-message"></div>
             <div id="player-status-container">
                 <table id="player-status"></table>
@@ -28,7 +28,7 @@
         <div id="outer-board-container">
             <section id="board">
                 <div>
-                    <h1 id="board-name">Nothing at this point in time</h1>
+                    <h1 id="board-name"></h1>
                 </div>
                 <div id="board-grid-container">
                     <table id="board-grid"></table>

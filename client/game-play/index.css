@@ -22,13 +22,12 @@ body {
 
 #end-game {
   position: absolute;
-  top: 50px;
-  left: 50px;
-  font-size: 16px;
+  margin: 10px;
+  font-size: 14px;
   color: white;
   cursor: pointer;
-  padding: 6px;
-  border-width: 5px !important;
+  padding: 4px;
+  border-width: 2px !important;
 }
 
 #end-game:hover {
@@ -84,12 +83,22 @@ body {
 }
 
 #board-grid td {
+  position: relative;
   font-size: 3.5vw;
   width: 1.015em;
   height: 1.015em;
-  background-image: url("/client/assets/images/cream-coloured-wood-texture.jpg");
+  transform: scaleY(-1);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+}
+
+#board-grid td > div {
+  position: absolute;
+  padding: 5px;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  color: black;
 }
 
 .board-piece {
@@ -104,7 +113,7 @@ body {
 }
 
 .board-piece img {
-    width: 100%;
+  width: 100%;
 }
 
 #side-panel {
@@ -113,7 +122,7 @@ body {
   grid-template-rows: 0.5fr 1fr;
   margin: 70px;
   margin-right: 0;
-  padding: 40px;
+  padding: 50px;
   gap: 30px;
 }
 
@@ -205,77 +214,77 @@ body {
 }
 
 #question-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000000a1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000a1;
 
-    display: grid;
-    place-items: center;
+  display: grid;
+  place-items: center;
 }
 
 #question-outer-container {
-    display: grid;
-    place-items: center;
-    height: 50%;
-    width: 30%;
+  display: grid;
+  place-items: center;
+  height: 50%;
+  width: 30%;
 }
 
 #question-inner-container {
-    display: grid;
-    place-items: center;
-    row-gap: 30px;
-    height: 80%;
-    width: 80%;
-    color: white;
+  display: grid;
+  place-items: center;
+  row-gap: 30px;
+  height: 80%;
+  width: 80%;
+  color: white;
 }
 
 #question {
-    display: grid;
-    text-align: center;
+  display: grid;
+  text-align: center;
 }
 #question > * {
-    margin: 0;
+  margin: 0;
 }
 
 #answers-container {
-    place-self: stretch;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+  place-self: stretch;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 #answer-button {
-    background-color: transparent;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    border-color: #362419;
-    font-size: 16px;
-    color: white;
-    border-width: 5px;
-    border-style: outset;
+  background-color: transparent;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-color: #362419;
+  font-size: 16px;
+  color: white;
+  border-width: 5px;
+  border-style: outset;
 }
 
 #answer-button:hover {
-    color: gold;
-    border-style: inset;
+  color: gold;
+  border-style: inset;
 }
 
 #question-info {
-    table-layout: fixed;
-    width: 100%;
-    place-self: stretch;
-    border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  place-self: stretch;
+  border-collapse: collapse;
 }
 
 #question-info td,
 #question-info th {
-    padding: 5px;
-    border: 1px solid white;
-    text-align: center;
+  padding: 5px;
+  border: 1px solid white;
+  text-align: center;
 }
 
 @media screen and (max-width: 1400px) {
@@ -292,7 +301,7 @@ body {
     place-items: center;
     height: 50%;
     width: 70%;
-}
+  }
 
   #board-grid td {
     width: 2.2em;
