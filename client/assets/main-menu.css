@@ -1,23 +1,21 @@
 body {
-    background-color: #9C4734;
+    background-image: url("./images/history-wallpaper.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
   }
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-  
-  
-  h1 {
-    background-color: #348A9D;
+h1 {
+    background-image: url("/client/assets/images/wood-background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     color: #fff;
     text-align: center;
     font-size: 44px;
@@ -28,6 +26,10 @@ form {
     justify-content: center;
     align-items: center;
     margin-bottom: 37px;
+    border-radius: 5px;
+    border-color: #362419;
+    border-width: 10px;
+    border-style: groove;
   }
   
   section {
@@ -37,11 +39,19 @@ form {
   }
   
   .button {
+    background-image: url("/client/assets/images/wood-background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: inline-block;
     font-size: 24px;
     text-align: center;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 5px;
+    border-color: #362419;
+    border-width: 10px;
+    border-style: groove;
+    
     cursor: pointer;
     transition: border 0.1s;
   }
@@ -54,8 +64,7 @@ form {
   
   #create-board,
   #edit-board {
-    background-color: #FF9901;
-    color: #000;
+    color: #fff;
     order: 1;
     width: 247px;
     height: 108px;
