@@ -207,12 +207,6 @@ const displayGrid = (grid) => {
     } 
 }
 
-
-
-
-
-
-
 class Question {
     constructor (question, answers, correctAnswerIndex, reward, penalty) {
         this.question = question,
