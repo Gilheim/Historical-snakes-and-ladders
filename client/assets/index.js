@@ -1,44 +1,34 @@
-const gridButton = document.querySelector(".test");
-gridButton.addEventListener("click", fetchGrid);
-gridButton.name = "Blank Grid"
+const boardGrid = document.getElementById("board-grid");
 
-const body = document.querySelector("body")
+// async function fetchGrid() {
+//     try {
+//         const gridData = await fetch(`http://localhost:3000/grids/${gridButton.name}`)
+//         if (gridData.ok) {
+//             const data = await gridData.json()
+//             displayGrid(data)
+//         } else {
+//             throw "Something went wrong with the API request"
+//         }
+//     } catch(e) {
+//         console.log(e)
+//     }
+// }
 
-async function fetchGrid() {
-    try {
-        const gridData = await fetch(`http://localhost:3000/grids/${gridButton.name}`)
-        if (gridData.ok) {
-            const data = await gridData.json()
-            displayGrid(data)
-        } else {
-            throw "Something went wrong with the API request"
-        }
-    } catch(e) {
-        console.log(e)
+const displayGrid = () => {
+  let cellCount = 1;
+  for (let i = 0; i < 8; i++) {
+    const gridRow = document.createElement("tr");
+    for (let j = 0; j < 8; j++) {
+      const cell = document.createElement("td");
+      cell.id = "square-" + cellCount++;
+      gridRow.appendChild(cell);
     }
-}
+    if (i % 2) gridRow.append(...Array.from(gridRow.childNodes).reverse());
+    boardGrid.appendChild(gridRow);
+  }
+};
 
-const displayGrid = (grid) => {
-    const table = document.createElement("table")
-    body.appendChild(table)
-    for(i=7;i>= 0;i--){
-        let row = document.createElement("tr")
-        row.id = "row " + i.toString()
-        table.appendChild(row)
-    }
-    for(i = grid.grid.length - 1 ; i >= 0; i--){
-        let td = document.createElement("td")
-        td.textContent = grid.grid[i].index + 1
-        let rowNumber = Math.floor(i/8)
-        if(rowNumber%2 == 1){
-            document.getElementById("row " + rowNumber).append(td)
-        } else {
-            document.getElementById("row " + rowNumber).prepend(td)
-        }
-        
-    }
-    
-}
+displayGrid();
 
 let players = [];
 // a value from 0 to 3 dictating which player is next to throw
@@ -62,8 +52,6 @@ const createPlayers = () => {
 };
 
 createPlayers();
-
-const boardGrid = document.getElementById("board-grid");
 
 /**
  * Takes the id of a player piece and a square and places piece centered within square
@@ -102,103 +90,112 @@ const createPlayerHTMLElements = () => {
     boardPieceImage.alt = `player ${i + 1}'s board piece`;
     playerDiv.appendChild(boardPieceImage);
 
-    playerDiv.classList.add("board-piece");
-
     boardGrid.appendChild(playerDiv);
 
     movePiece(playerId, "square-1");
+
+    playerDiv.classList.add("board-piece");
   }
 };
 
 createPlayerHTMLElements();
 
-const gameStatusDiv = document.getElementById("game-status");
-const updateGameStatus = () => {
-  //clear div first if any content is inside
-  gameStatusDiv.innerHTML = "";
+const playerStatusTable = document.getElementById("player-status");
 
-  const playerContainers = [];
+const updatePlayerStatus = () => {
+  //clear table first if any content is inside
+  playerStatusTable.innerHTML = `
+    <tr>
+        <td>Piece</td>
+        <td>Name</td>
+        <td>Square</td>
+    </tr>
+  `;
+
+  const playerRows = [];
   for (let playerObj of players) {
-    
-    const playerContainer = document.createElement('div');
-    const nameContainer = document.createElement('div');
+    const playerRow = document.createElement("tr");
+
+    const pieceImageCell = document.createElement("td");
+    const nameCell = document.createElement("td");
+    const currentSquareCell = document.createElement("td");
 
     //add dedicated image to name div
     const boardPieceImage = document.createElement("img");
     boardPieceImage.src = `./assets/images/board-pieces/${playerObj.id}.svg`;
-    boardPieceImage.alt = `${playerObj.id}'s board piece symbol`;
+    boardPieceImage.alt = `${playerObj.name}'s board piece image`;
+    pieceImageCell.appendChild(boardPieceImage);
+    playerRow.appendChild(pieceImageCell);
 
-    nameContainer.appendChild(boardPieceImage);
+    nameCell.textContent = playerObj.name;
+    playerRow.appendChild(nameCell);
 
-    const nameDiv = document.createElement('h2');
-    nameDiv.textContent = playerObj.name;
+    currentSquareCell.textContent = playerObj.currentSquare;
+    playerRow.appendChild(currentSquareCell);
 
-    nameContainer.appendChild(nameDiv);
-
-    playerContainer.appendChild(nameContainer);
-
-    const currentSquareDiv = document.createElement('div');
-    currentSquareDiv.textContent = playerObj.currentSquare;
-
-    playerContainer.appendChild(currentSquareDiv);
-
-    playerContainers.push(playerContainer);
+    playerRows.push(playerRow);
   }
+  playerStatusTable.append(...playerRows);
+};
 
-  playerContainers.forEach((playerContainer) => gameStatusDiv.appendChild(playerContainer));
+updatePlayerStatus();
 
-  const gamePromptDiv = document.createElement("div");
-  const gameMessage = `It's ${players[currentPlayer].name}" turn to throw now`;
-  gamePromptDiv.textContent = gameMessage;
+const gameMessageContainer = document.getElementById("game-message");
 
-  gameStatusDiv.appendChild(gamePromptDiv);
-}
+const updateGameMessage = (message) => {
+  //clear div first if any content is inside
+  gameMessageContainer.innerHTML = "";
+  const gameMessageDiv = document.createElement("div");
+  gameMessageDiv.textContent = message;
+  gameMessageContainer.appendChild(gameMessageDiv);
+};
 
-updateGameStatus();
-// console.log(players);
+updateGameMessage();
 
 const diceButton = document.getElementById("dice");
-const diceThrowInfo = document.getElementById("dice-throw-info");
 
 const throwDice = async () => {
   const randValue1to6 = Math.ceil(Math.random() * 6);
 
   diceButton.classList.add("dice-throw");
   diceButton.disabled = true;
-  diceThrowInfo.dataset.thrown = true;
+
+  //create dice image element
+  const image = document.createElement("img");
+  image.src = `./assets/images/dice/${randValue1to6}.svg`;
+  image.alt = `value of ${randValue1to6} on die`;
 
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   //change dice image mid-throw
   diceButton.innerHTML = "";
-  const image = document.createElement("img");
-  image.src = `./assets/images/dice/${randValue1to6}.svg`;
-  image.alt = `value of ${randValue1to6} on die`;
   diceButton.appendChild(image);
 
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   diceButton.classList.remove("dice-throw");
-  diceButton.disabled = false;
-  diceThrowInfo.dataset.thrown = false;
-
-  diceThrowInfo.textContent = `${players[currentPlayer].name} threw a value of ${randValue1to6}`;
+  
 
   //update current players position on the grid using random value
   const playerObj = players[currentPlayer];
   playerObj.currentSquare += randValue1to6;
 
+  updateGameMessage(`${players[currentPlayer].name} threw a value of ${randValue1to6}`);
+
   // use recently updated current square of player to move player piece to the correct position on the board
   const pieceId = playerObj.id;
   const squareId = `square-${playerObj.currentSquare}`;
-  // movePiece(pieceId, squareId)
+  movePiece(pieceId, squareId)
 
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
   //update the current player next to throw the dice
   currentPlayer = (currentPlayer + 1) % players.length;
 
-  updateGameStatus();
+  updatePlayerStatus();
+  updateGameMessage(`It's ${players[currentPlayer].name}'s turn to throw now`);
+
+  diceButton.disabled = false;
 };
 
 diceButton.addEventListener("click", throwDice);
