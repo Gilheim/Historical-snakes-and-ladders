@@ -4,6 +4,7 @@ let boardInfo = {};
 let boardName = "";
 
 const boardGrid = document.getElementById("board-grid");
+const boardNameContainer = document.getElementById("board-name");
 
 async function fetchGrid() {
   try {
@@ -20,18 +21,35 @@ async function fetchGrid() {
   }
 }
 
-const displayGrid = () => {
+const displayGrid = async () => {
+  let imageURLs = null;
+  try {
+    const resp = await fetch(
+      `https://pixabay.com/api/?key=37050288-77d40d58eba88db2fc7e995ef&q=statues&image_type=photo&per_page=64`
+    );
+    const imageInfoArr = (await resp.json()).hits;
+    imageURLs = imageInfoArr.map((imageInfo) => imageInfo["previewURL"]);
+  } catch (error) {
+    console.log(error);
+  }
+
   let cellCount = 1;
   for (let i = 0; i < 8; i++) {
     const gridRow = document.createElement("tr");
     for (let j = 0; j < 8; j++) {
       const cell = document.createElement("td");
+      if (imageURLs) cell.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.7),rgba(255, 255, 255, 0.7)), url('${imageURLs[cellCount - 1]}')`;
+      cell.innerHTML = `<div>${cellCount}</div>`;
       cell.id = "square-" + cellCount++;
       gridRow.appendChild(cell);
     }
     if (i % 2) gridRow.append(...Array.from(gridRow.childNodes).reverse());
     boardGrid.appendChild(gridRow);
   }
+  createPlayersAndBoard();
+  createPlayerHTMLElements();
+  updatePlayerStatus();
+  boardNameContainer.textContent = boardName;
 };
 
 displayGrid();
@@ -40,7 +58,7 @@ let players = [];
 // a value from 0 to 3 dictating which player is next to throw
 let currentPlayer = 0;
 
-const createPlayersAndBoard = () => {
+function createPlayersAndBoard() {
   const formQueryString = window.location.search;
   const formValues = [...new URLSearchParams(formQueryString).values()];
 
@@ -61,7 +79,7 @@ const createPlayersAndBoard = () => {
   fetchGrid();
 };
 
-createPlayersAndBoard();
+
 
 /**
  * Takes the id of a player piece and a square and places piece centered within square
@@ -86,7 +104,7 @@ function movePiece(pieceId, squareId) {
 }
 
 const boardGridContainer = document.getElementById("board-grid-container");
-const createPlayerHTMLElements = async () => {
+async function createPlayerHTMLElements() {
   for (let i = 0; i < players.length; i++) {
     const playerId = `player${i}`;
     const playerObj = players[i];
@@ -113,11 +131,11 @@ const createPlayerHTMLElements = async () => {
   );
 };
 
-createPlayerHTMLElements();
+
 
 const playerStatusTable = document.getElementById("player-status");
 
-const updatePlayerStatus = () => {
+function updatePlayerStatus() {
   //clear table first if any content is inside
   playerStatusTable.innerHTML = `
     <tr>
@@ -153,7 +171,7 @@ const updatePlayerStatus = () => {
   playerStatusTable.append(...playerRows);
 };
 
-updatePlayerStatus();
+
 
 function updateGameMessage(message) {
   //clear div first if any content is inside
