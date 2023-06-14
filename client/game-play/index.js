@@ -1,3 +1,36 @@
+const gameMessageContainer = document.getElementById("game-message");
+
+const boardInfo = {
+  name: "test grid",
+  grid: [
+    {
+      index: 0,
+      question: {
+        question: "which answer is right?",
+        answers: ["wrong", "wrong", "right", "wrong"],
+        correctAnswerIndex: 2,
+        reward: 3,
+        penalty: 0,
+      },
+    },
+    {
+      index: 1,
+      question: {
+        question: "Which is the best teamname?",
+        answers: [
+          "ctrl-alt-elite",
+          "binary bananas",
+          "I can't remember",
+          "I can't remember",
+        ],
+        correctAnswerIndex: 0,
+        reward: 55,
+        penalty: 55,
+      },
+    },
+  ],
+};
+
 const boardGrid = document.getElementById("board-grid");
 
 // async function fetchGrid() {
@@ -59,9 +92,11 @@ createPlayers();
  * @param {string} pieceId - id of the div representing a player playing
  * @param {string} squareElem - id of the div representing a square within the board
  */
-const movePiece = (pieceId, squareId) => {
+function movePiece(pieceId, squareId) {
   const pieceElem = document.getElementById(pieceId);
-  const squareElem = document.getElementById(squareId);
+    const squareElem = document.getElementById(squareId);
+    
+    console.log(squareElem);
 
   const squareCenterPosInGrid = {};
   squareCenterPosInGrid.xPos =
@@ -75,6 +110,7 @@ const movePiece = (pieceId, squareId) => {
     squareCenterPosInGrid.yPos - pieceElem.offsetHeight / 2 + "px";
 };
 
+const boardGridContainer = document.getElementById("board-grid-container");
 const createPlayerHTMLElements = () => {
   for (let i = 0; i < players.length; i++) {
     const playerId = `player${i}`;
@@ -88,14 +124,19 @@ const createPlayerHTMLElements = () => {
     const boardPieceImage = document.createElement("img");
     boardPieceImage.src = `./../assets/images/board-pieces/${playerId}.svg`;
     boardPieceImage.alt = `player ${i + 1}'s board piece`;
+
     playerDiv.appendChild(boardPieceImage);
 
-    boardGrid.appendChild(playerDiv);
+    boardGridContainer.appendChild(playerDiv);
 
     movePiece(playerId, "square-1");
 
     playerDiv.classList.add("board-piece");
   }
+
+  updateGameMessage(
+    `"${players[currentPlayer].name}" click on the dice to throw it`
+  );
 };
 
 createPlayerHTMLElements();
@@ -140,17 +181,13 @@ const updatePlayerStatus = () => {
 
 updatePlayerStatus();
 
-const gameMessageContainer = document.getElementById("game-message");
-
-const updateGameMessage = (message) => {
+function updateGameMessage(message) {
   //clear div first if any content is inside
   gameMessageContainer.innerHTML = "";
   const gameMessageDiv = document.createElement("div");
   gameMessageDiv.textContent = message;
   gameMessageContainer.appendChild(gameMessageDiv);
-};
-
-updateGameMessage();
+}
 
 const diceButton = document.getElementById("dice");
 
@@ -174,28 +211,147 @@ const throwDice = async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   diceButton.classList.remove("dice-throw");
-  
 
   //update current players position on the grid using random value
   const playerObj = players[currentPlayer];
   playerObj.currentSquare += randValue1to6;
-
-  updateGameMessage(`${players[currentPlayer].name} threw a value of ${randValue1to6}`);
+  if (playerObj.currentSquare > 64) playerObj.currentSquare = 64;
+  updateGameMessage(
+    `${players[currentPlayer].name} threw a value of ${randValue1to6}`
+  );
 
   // use recently updated current square of player to move player piece to the correct position on the board
   const pieceId = playerObj.id;
   const squareId = `square-${playerObj.currentSquare}`;
-  movePiece(pieceId, squareId)
+  movePiece(pieceId, squareId);
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise((resolve) => setTimeout(resolve, 2500));
+
+  checkAndLoadQuestion();
+
+  updatePlayerStatus();
+};
+
+diceButton.addEventListener("click", throwDice);
+
+function checkAndLoadQuestion() {
+  const playerObj = players[currentPlayer];
+  //   const playerCurrentSquare = playerObj.currentSquare;
+  const boardInfoElems = boardInfo.grid;
+
+  const boardInfoElem = boardInfoElems.find(
+    (boardInfoElem) => boardInfoElem.index === 1
+  );
+
+  if (!boardInfoElem) return;
+
+  const questionObj = boardInfoElem.question;
+  createQuestionPopUp(questionObj);
+}
+
+const pageBody = document.body;
+
+function createQuestionPopUp(questionObj) {
+  const backdrop = document.createElement("div");
+  backdrop.id = "question-backdrop";
+
+  const questionOuterContainer = document.createElement("main");
+  questionOuterContainer.id = "question-outer-container";
+
+  const questionInnerContainer = document.createElement("div");
+  questionInnerContainer.id = "question-inner-container";
+
+  questionOuterContainer.append(questionInnerContainer);
+  backdrop.append(questionOuterContainer);
+
+  const question = document.createElement("div");
+  question.id = "question";
+  question.innerHTML = `<h1>${questionObj.question}</h1>`;
+  questionInnerContainer.appendChild(question);
+
+  const answersContainer = document.createElement("div");
+  answersContainer.id = "answers-container";
+
+  answersContainer.addEventListener("click", async (e) => {
+    checkAnswer(e, questionObj);
+  });
+
+  for (let answer of questionObj.answers) {
+    const questionAnswer = document.createElement("button");
+    questionAnswer.id = "answer-button";
+    questionAnswer.textContent = answer;
+    answersContainer.appendChild(questionAnswer);
+  }
+
+  questionInnerContainer.appendChild(answersContainer);
+
+  const questionInfo = document.createElement("table");
+  questionInfo.id = "question-info";
+  questionInfo.innerHTML = `
+    <tr>
+        <th>Reward</th>
+        <th>Penalty</th>
+    </tr>
+    <tr>
+        <td>Move Up ${questionObj.reward} Squares</td>
+        <td>Move Down ${questionObj.penalty} Squares</td>
+    </tr>
+  `;
+
+  questionInnerContainer.appendChild(questionInfo);
+
+  pageBody.appendChild(backdrop);
+}
+
+async function checkAnswer(event, questionObj) {
+  const button = event.target;
+  if (button.tagName !== "BUTTON") return;
+
+  const answerValue = button.innerHTML;
+  const answerIndex = questionObj.answers.findIndex((answer) => {
+    return answer === answerValue;
+  });
+
+  const answersContainer = button.parentElement;
+  const allAnswers = Array.from(answersContainer.children);
+  allAnswers.forEach((answer, index) => {
+    answer.style.borderColor =
+      index == questionObj.correctAnswerIndex ? "green" : "red";
+    answer.disabled = true;
+  });
+
+  const playerObj = players[currentPlayer];
+
+  if (answerIndex == questionObj.correctAnswerIndex) {
+    const reward = questionObj.reward;
+    playerObj.currentSquare += reward;
+    if (playerObj.currentSquare > 64) playerObj.currentSquare = 64;
+    updateGameMessage(
+      `${players[currentPlayer].name} got their question correct. They progress by ${reward} squares`
+    );
+  } else {
+    const penalty = questionObj.penalty;
+    playerObj.currentSquare -= penalty;
+    if (playerObj.currentSquare < 1) playerObj.currentSquare = 1;
+    updateGameMessage(
+      `${players[currentPlayer].name} got their question incorrect. They regress by ${penalty} squares`
+    );
+  }
+
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+
+  document.getElementById("question-backdrop").remove();
+
+  const pieceId = playerObj.id;
+  const squareId = `square-${playerObj.currentSquare}`;
+  movePiece(pieceId, squareId);
+
+  await new Promise((resolve) => setTimeout(resolve, 2500));
 
   //update the current player next to throw the dice
   currentPlayer = (currentPlayer + 1) % players.length;
 
   updatePlayerStatus();
   updateGameMessage(`It's ${players[currentPlayer].name}'s turn to throw now`);
-
   diceButton.disabled = false;
-};
-
-diceButton.addEventListener("click", throwDice);
+}
