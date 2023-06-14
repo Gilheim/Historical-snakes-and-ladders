@@ -15,13 +15,11 @@ async function fullEditForm(name) {
         if(editSquare.value == ""){
             for(i=0; i<64; i++) {
                 let newSquare = document.querySelector(`#square-${i}`)
-                if(newSquare.className == "edit-square"){
                     if(realGrid.grid[i].question == null) {
                         newSquare.className = "empty-square"
                     } else {
                         newSquare.className = "square-question"
                     }               
-                }
             }
         } else if(Number.isNaN(squareIndex) === false) {
             let realIndex = squareIndex - 1
@@ -80,6 +78,7 @@ async function fullEditForm(name) {
             }
             if(correctAnswerIndex != null) {
                 let question = new Question(questionText, answers, correctAnswerIndex, rewardNumber, penaltyNumber)
+                console.log(question)
                 for(i = 0; i< realGrid.grid.length; i++) {
                     if(squareNumberIndex === i){
                         realGrid.grid[i].question = question
@@ -152,7 +151,95 @@ async function fullEditForm(name) {
 
     let editSquare = document.getElementsByName("squaretoedit")[0]
     editSquare.addEventListener("keyup", changeSquareColour)
+
+    const makeAGrid = () => {
+        
+        questionGenerator([])
+    }
+
+    const resetGrid = () => {
+        for(i= 0; i<64; i++){
+            let newSquare = document.querySelector(`#square-${i}`)
+            if(newSquare.className == "square-question"){  
+                realGrid.grid[i].question = null
+                newSquare.className = "empty-square"  
+            }
+        }
+    }
+
+    const randomNumberNotUsed = () => {
+        let randomNumber =  Math.floor(Math.random()*64)
+        if(realGrid.grid[randomNumber].question == null) {
+            return randomNumber
+        } else {
+            return randomNumberNotUsed()
+        }
+    }
+
+    const checkEverySquare = () => {
+        let filled = true
+        for(i= 0; i<64; i++){
+            if(realGrid.grid[i].question == null) {
+                filled = false
+            }
+        }
+        return filled
+    }
     
+
+    let randomGridButton = document.querySelector("#randomgridgenerator")
+    randomGridButton.addEventListener("click", makeAGrid)
+
+    let resetGridButton = document.querySelector("#resetgrid")
+    resetGridButton.addEventListener("click", resetGrid)
+    
+    
+
+    async function questionGenerator(arr) {
+        if (!checkEverySquare()){
+            const questions = await fetch('https://the-trivia-api.com/v2/questions')
+            if (questions.ok){
+                const questionData = await questions.json()
+                
+                const makeQuestionArray = (arr) => {
+                    for(i=0; i< questionData.length; i++) {
+                        if(questionData[i].category === "history"){
+                            let question = questionData[i].question.text
+                            let answers = questionData[i].incorrectAnswers
+                            let correctAnswer = questionData[i].correctAnswer
+                            answers.push(correctAnswer)
+                            answers.sort()
+                            let correctAnswerIndex = 0
+                            for(j=0; j<4; j++){
+                                if (answers[j] === correctAnswer){
+                                    correctAnswerIndex = j
+                                } else {
+                                    correctAnswerIndex = correctAnswerIndex
+                                }
+                            }
+                            let reward = Math.floor(Math.random()*5) + 1
+                            let penalty = Math.floor(Math.random()*5) + 1
+                            let actualQuestion = new Question(question,answers,correctAnswerIndex,reward,penalty)
+                            arr.push(actualQuestion)
+                            let randomNumber = randomNumberNotUsed()
+                            realGrid.grid[randomNumber].question = actualQuestion
+                            changeSquareColour()
+                            
+                        } else {
+                            
+                        }
+                    }
+                    if(arr.length < 48){
+                        questionGenerator(arr)
+                    }
+                }
+                makeQuestionArray(arr)
+            }
+        } else {
+            
+        }
+
+    } 
 }
 
 async function fetchGrid(name) {
@@ -253,3 +340,5 @@ const buttons = document.querySelectorAll('.boards button');
             button.classList.add('clicked');
         });
     });
+
+
