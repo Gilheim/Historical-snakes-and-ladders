@@ -373,6 +373,13 @@ const goToPage = (e) => {
     location.reload()
 }
 
+const goToMenu = () => {
+    window.location ="http://127.0.0.1:5500/client/main-menu.html"
+}
+
+const mainMenuButton = document.querySelector("#mainmenu")
+mainMenuButton.addEventListener("click", goToMenu)
+
 
 
 
