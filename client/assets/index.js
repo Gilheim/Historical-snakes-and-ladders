@@ -1,12 +1,13 @@
-const gridButton = document.querySelector(".test");
-gridButton.addEventListener("click", fullEditForm);
-gridButton.name = "Blank Grid"
+window.onload = () => {
+    let realGridName = "blank grid"
+    fullEditForm(realGridName)
+}
 
 const section = document.querySelector("section")
 
-async function fullEditForm() {
-    fetchGrid()
-    let realGrid = await fetchGridData()
+async function fullEditForm(name) {
+    fetchGrid(name)
+    let realGrid = await fetchGridData(name)
 
     async function changeSquareColour() {
         let squareIndex = parseInt(editSquare.value)
@@ -81,7 +82,6 @@ async function fullEditForm() {
                 for(i = 0; i< realGrid.grid.length; i++) {
                     if(squareNumberIndex === i){
                         realGrid.grid[i].question = question
-                        console.log(realGrid)
                     }
                 }
                 e.target.question.value = ""
@@ -153,9 +153,9 @@ async function fullEditForm() {
     
 }
 
-async function fetchGrid() {
+async function fetchGrid(name) {
     try {
-        const gridData = await fetch(`http://localhost:3000/grids/${gridButton.name}`)
+        const gridData = await fetch(`http://localhost:3000/grids/${name}`)
         if (gridData.ok) {
             const data = await gridData.json()
             displayGrid(data)
@@ -167,9 +167,9 @@ async function fetchGrid() {
     }
 }
 
-async function fetchGridData() {
+async function fetchGridData(name) {
     try {
-        const gridData = await fetch(`http://localhost:3000/grids/${gridButton.name}`)
+        const gridData = await fetch(`http://localhost:3000/grids/${name}`)
         if (gridData.ok) {
             const data = await gridData.json()
             return data
