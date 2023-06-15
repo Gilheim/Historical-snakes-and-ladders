@@ -9,7 +9,6 @@ const section = document.querySelector("section")
 async function fullEditForm(name) {
     fetchGrid(name)
     let realGrid = await fetchGridData(name)
-
     const changeSquareColour = () => {
         let squareIndex = parseInt(editSquare.value)
         if(editSquare.value == ""){
