@@ -138,6 +138,11 @@ body {
   border-radius: 10px;
   border: groove #362419 5px;
   margin-left: 10px;
+  text-decoration: none;
+}
+
+#mainmenu:hover {
+  color: red;
 }
 
 table {
