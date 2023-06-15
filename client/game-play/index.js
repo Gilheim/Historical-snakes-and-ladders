@@ -25,7 +25,7 @@ const displayGrid = async () => {
   let imageURLs = null;
   try {
     const resp = await fetch(
-      `https://pixabay.com/api/?key=37050288-77d40d58eba88db2fc7e995ef&q=statues&image_type=photo&per_page=64`
+      `https://pixabay.com/api/?key=37050288-77d40d58eba88db2fc7e995ef&q=historical&image_type=photo&per_page=64`
     );
     const imageInfoArr = (await resp.json()).hits;
     imageURLs = imageInfoArr.map((imageInfo) => imageInfo["previewURL"]);
@@ -38,7 +38,10 @@ const displayGrid = async () => {
     const gridRow = document.createElement("tr");
     for (let j = 0; j < 8; j++) {
       const cell = document.createElement("td");
-      if (imageURLs) cell.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.7),rgba(255, 255, 255, 0.7)), url('${imageURLs[cellCount - 1]}')`;
+      if (imageURLs)
+        cell.style.backgroundImage = `linear-gradient(rgba(255,252,201, 0.7),rgba(255,252,201, 0.7)), url('${
+          imageURLs[cellCount - 1]
+        }')`;
       cell.innerHTML = `<div>${cellCount}</div>`;
       cell.id = "square-" + cellCount++;
       gridRow.appendChild(cell);
@@ -77,9 +80,7 @@ function createPlayersAndBoard() {
     players.push(playerObj);
   }
   fetchGrid();
-};
-
-
+}
 
 /**
  * Takes the id of a player piece and a square and places piece centered within square
@@ -129,9 +130,7 @@ async function createPlayerHTMLElements() {
   updateGameMessage(
     `"${players[currentPlayer].name}" click on the dice to throw it`
   );
-};
-
-
+}
 
 const playerStatusTable = document.getElementById("player-status");
 
@@ -169,9 +168,7 @@ function updatePlayerStatus() {
     playerRows.push(playerRow);
   }
   playerStatusTable.append(...playerRows);
-};
-
-
+}
 
 function updateGameMessage(message) {
   //clear div first if any content is inside
@@ -328,14 +325,18 @@ async function checkAnswer(event, questionObj) {
     playerObj.currentSquare += reward;
     if (playerObj.currentSquare > 64) playerObj.currentSquare = 64;
     updateGameMessage(
-      `${players[currentPlayer].name} got their question correct. They progress by ${reward} squares`
+      `${players[currentPlayer].name}'s answer was correct. ${
+        players[currentPlayer].name
+      } progresses by ${reward} square${penalty > 1 ? "s" : ""}`
     );
   } else {
     const penalty = questionObj.penalty;
     playerObj.currentSquare -= penalty;
     if (playerObj.currentSquare < 1) playerObj.currentSquare = 1;
     updateGameMessage(
-      `${players[currentPlayer].name} got their question incorrect. They regress by ${penalty} squares`
+      `${players[currentPlayer].name}'s answer was incorrect. ${
+        players[currentPlayer].name
+      } regresses by ${penalty} square${penalty > 1 ? "s" : ""}`
     );
   }
 
@@ -362,7 +363,7 @@ async function checkAnswer(event, questionObj) {
 async function checkForWinner() {
   const player = players[currentPlayer];
   if (player.currentSquare >= 64) {
-    updateGameMessage(`${player.name} has won`);
+    updateGameMessage(`${player.name} has won ${boardName}`);
     await new Promise((resolve) => setTimeout(resolve, 2000));
     history.back();
   }
