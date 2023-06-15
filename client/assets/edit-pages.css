@@ -96,6 +96,10 @@ body {
   height: 36px;
 }
 
+.save:hover {
+  color: red;
+}
+
 #randomgridgenerator{
   background-image: url("/client/assets/images/wood-background.jpg");
     color: #ffff;
@@ -109,8 +113,12 @@ body {
     border: groove #362419 5px;
     margin-right: 5px;
     margin-bottom: 2px;
-
 }
+
+#randomgridgenerator:hover {
+  color: red;
+}
+
 #resetgrid{
   background-image: url("/client/assets/images/wood-background.jpg");
   color: #ffff;
@@ -123,6 +131,9 @@ body {
     border-radius: 10px;
     border: groove #362419 5px;
     margin-left: 5px;
+}
+#resetgrid:hover {
+  color: red;
 }
 
 #mainmenu{
