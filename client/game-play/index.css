@@ -10,6 +10,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  
 }
 
 #game-container {
@@ -17,18 +18,17 @@ body {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   column-gap: 70px;
-  margin: 38px;
+  margin: 2vw;
 }
 
 #end-game {
   position: absolute;
-  top: 50px;
-  left: 50px;
-  font-size: 16px;
+  margin: 0.3vw;
+  font-size: 14px;
   color: white;
   cursor: pointer;
-  padding: 6px;
-  border-width: 5px !important;
+  padding: 4px;
+  border-width: 2px !important;
 }
 
 #end-game:hover {
@@ -38,7 +38,7 @@ body {
 #outer-board-container {
   display: grid;
   place-items: center;
-  margin: 70px;
+  margin: 3.65vw;
   margin-left: 0;
 }
 
@@ -49,6 +49,7 @@ body {
   row-gap: 20px;
 }
 
+#question-outer-container,
 #end-game,
 #side-panel,
 #board > * {
@@ -73,43 +74,55 @@ body {
   color: whitesmoke;
 }
 
-#board-grid {
+#board-grid-container {
   position: relative;
-  border-spacing: 7px;
   transform: scaleY(-1);
+}
+
+#board-grid {
+  border-spacing: 7px;
 }
 
 #board-grid td {
-  border: solid black 1px;
-
+  position: relative;
   font-size: 3.5vw;
-
-  width: 1em;
-  height: 1em;
-
-  background-image: url("/client/assets/images/cream-coloured-wood-texture.jpg");
+  width: 1.015em;
+  height: 1.015em;
+  transform: scaleY(-1);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+}
+
+#board-grid td > div {
+  position: absolute;
+  padding: 5px;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  color: #362419;
 }
 
 .board-piece {
-  display: grid;
   position: absolute;
-  height: max-content;
-  width: 2.3vw;
+  font-size: 3vw;
+  width: 1.015em;
+  height: 1.015em;
   transform: scaleY(-1);
   transition-property: left, top;
-  transition-duration: 3s;
+  transition-duration: 2.5s;
   transition-timing-function: ease-in-out;
+}
+
+.board-piece img {
+  width: 100%;
 }
 
 #side-panel {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.5fr 1fr;
-  margin: 70px;
+  margin: 3.65vw;
   margin-right: 0;
-  padding: 40px;
+  padding: 2.6vw;
   gap: 30px;
 }
 
@@ -128,29 +141,31 @@ body {
 }
 
 #player-status {
+  font-size: 1vw;
 }
 
 #player-status td {
-  border-color: black;
   text-align: center;
   border: 2px solid;
 }
 
 #player-status img {
-  width: 50px;
-  padding: 10px;
+  width: 3.2vw;
+  margin: 0.4vw;
 }
 
-#player-status tr > td:first-of-type {
-  width: 40px;
+#player-status tr > td:nth-child(2) {
+  width: 52%;
 }
 
 #game-message {
   grid-column: span 2;
-  font-size: 36px;
+  font-size: 2vw;
   display: grid;
   place-items: center;
   color: white;
+  text-align: center;
+  padding: 2vw;
 }
 
 #dice-container {
@@ -200,25 +215,76 @@ body {
   cursor: pointer;
 }
 
-@media screen and (max-width: 1400px) {
-  body {
-    place-items: center;
-  }
+#question-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000a1;
 
-  #game-container {
-    grid-template-columns: 1fr;
-  }
+  display: grid;
+  place-items: center;
+}
 
-  #board-grid td {
-    width: 2.2em;
-    height: 2.2em;
-  }
+#question-outer-container {
+  display: grid;
+  place-items: center;
+  height: 60%;
+  width: 30%;
+}
 
-  #outer-board-container {
-    margin-left: 70px;
-  }
+#question-inner-container {
+  display: grid;
+  place-items: center;
+  row-gap: 30px;
+  height: 80%;
+  width: 80%;
+  color: white;
+}
 
-  #side-panel {
-    margin-right: 70px;
-  }
+#question {
+  display: grid;
+  text-align: center;
+}
+#question > * {
+  margin: 0;
+}
+
+#answers-container {
+  place-self: stretch;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+#answer-button {
+  background-color: transparent;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-color: #362419;
+  font-size: 16px;
+  color: white;
+  border-width: 5px;
+  border-style: outset;
+}
+
+#answer-button:hover {
+  color: gold;
+  border-style: inset;
+}
+
+#question-info {
+  table-layout: fixed;
+  width: 100%;
+  place-self: stretch;
+  border-collapse: collapse;
+}
+
+#question-info td,
+#question-info th {
+  padding: 5px;
+  border: 1px solid white;
+  text-align: center;
 }
