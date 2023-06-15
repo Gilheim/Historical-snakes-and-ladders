@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./assets/index.js" defer></script>
     <script src="game-play/index.js" defer></script>
-    <link rel="stylesheet" href="./assets/index.css">
     <link rel="stylesheet" href="./assets/edit-pages.css">
+    <link rel="stylesheet" href="./assets/index.css">
     <title>Edit Page</title>
 </head>
 <body id = "editpage">
@@ -14,7 +14,7 @@
         <div id = "formcontainer">
         <form id = "gridform">
             <label for="board-name">Enter Board Name</label>
-            <input name="board-name" class="Input" type="text" placeholder="e.g. Barbara Liskov board" required>
+            <input name="boardname" class="Input" type="text" placeholder="e.g. Barbara Liskov board" required>
             <button type=submit value="submit" class = "save"> Save Grid</button>
             </form>
             <form id ="questionform">
@@ -46,7 +46,7 @@
                 <button class="dropbtn">Change grid</button>
                 <div class="dropdown-content">
             </div>
-            <button>Main Menu</button>
+            <button id="mainmenu">Main Menu</button>
             </div>
         </div>
     </section>
