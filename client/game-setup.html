@@ -8,18 +8,18 @@
     <title>Game Setup</title>
 </head>
 <body>
-    <div class="boards">
-    </div>
-    <div>
-        <h1>Enter Player Names</h1>
     <form id="player-form" action="/client/game-play/index.html">
-        <input name="player1" type="text" class="player-name" placeholder="Player 1">
-        <input name="player2" type="text" class="player-name" placeholder="Player 2">
-        <input name="player3" type="text" class="player-name" placeholder="Player 3">
-        <input name="player4" type="text" class="player-name" placeholder="Player 4">
-        <input name="board-name" placeholder="Board Name">
-        <button class="submit" type="submit">Start game</button>
-    </div>
+        <div class="boards"></div>
+        <div id="player-name-inputs">
+            <h1>Enter Player Names</h1>
+            <input name="player1" type="text" class="player-name" placeholder="Player 1" required>
+            <input name="player2" type="text" class="player-name" placeholder="Player 2">
+            <input name="player3" type="text" class="player-name" placeholder="Player 3">
+            <input name="player4" type="text" class="player-name" placeholder="Player 4">
+            <button class="submit" type="submit">Start game</button>
+        </div>
+        
     </form>
+    <button id="main-menu" onclick="history.back();">Go Back To Main Menu</button>
 </body>
 </html>
