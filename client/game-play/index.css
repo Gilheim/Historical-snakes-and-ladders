@@ -10,7 +10,6 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  
 }
 
 #game-container {
@@ -230,8 +229,8 @@ body {
 #question-outer-container {
   display: grid;
   place-items: center;
-  height: 60%;
-  width: 30%;
+  height: 65%;
+  width: 35%;
 }
 
 #question-inner-container {
@@ -246,6 +245,7 @@ body {
 #question {
   display: grid;
   text-align: center;
+  font-size: 0.8vw;
 }
 #question > * {
   margin: 0;
@@ -256,6 +256,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  
 }
 
 #answer-button {
@@ -264,9 +265,9 @@ body {
   cursor: pointer;
   border-radius: 5px;
   border-color: #362419;
-  font-size: 16px;
   color: white;
   border-width: 5px;
+  font-size: 0.9vw;
   border-style: outset;
 }
 
@@ -278,6 +279,7 @@ body {
 #question-info {
   table-layout: fixed;
   width: 100%;
+  font-size: 0.9vw;
   place-self: stretch;
   border-collapse: collapse;
 }

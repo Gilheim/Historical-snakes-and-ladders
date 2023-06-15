@@ -1,27 +1,167 @@
+//get all dom elements involved in game logic
 const gameMessageContainer = document.getElementById("game-message");
-
-let boardInfo = {};
-let boardName = "";
-
 const boardGrid = document.getElementById("board-grid");
 const boardNameContainer = document.getElementById("board-name");
+const boardGridContainer = document.getElementById("board-grid-container");
+const playerStatusTable = document.getElementById("player-status");
+const diceButton = document.getElementById("dice");
 
+/*
+ * Game State Objects
+ */
+let boardInfo = {};
+let boardName = "";
+let players = [];
+// a value from 0 to 3 dictating which player is next to throw
+let currentPlayer = 0;
+
+/*
+ * Update game message div with a message
+ */
+function updateGameMessage(message) {
+  //clear div first if any content is inside
+  gameMessageContainer.innerHTML = "";
+  const gameMessageDiv = document.createElement("div");
+  gameMessageDiv.textContent = message;
+  gameMessageContainer.appendChild(gameMessageDiv);
+}
+
+/*
+ * Fetch grid data from server using the board name
+ */
 async function fetchGrid() {
   try {
     const gridData = await fetch(`http://localhost:3000/grids/${boardName}`);
-    if (gridData.ok) {
-      const data = await gridData.json();
-      data.grid = data.grid.filter((boardInfoElem) => boardInfoElem.question);
-      boardInfo = data;
-    } else {
-      throw "Something went wrong with the API request";
-    }
+
+    const data = await gridData.json();
+    //remove all board info objects with out question data
+    data.grid = data.grid.filter((boardInfoElem) => boardInfoElem.question);
+    boardInfo = data;
   } catch (e) {
     console.log(e);
   }
 }
 
-const displayGrid = async () => {
+/*
+ * Initialise player data object array and board name and then run the fetch grid function
+ */
+function createPlayersAndBoard() {
+  const formQueryString = window.location.search;
+  const formValues = [...new URLSearchParams(formQueryString).values()];
+
+  //get board name from form values
+  boardName = formValues.shift();
+  const playerNames = formValues;
+
+  //remove white spaces and player name values that are empty
+  const playersPlaying = playerNames.map((name) => name.trim()).filter(Boolean);
+
+  for (let name of playersPlaying) {
+    //player object format
+    const playerObj = {
+      name,
+      currentSquare: 1,
+      id: null,
+    };
+    players.push(playerObj);
+  }
+
+  fetchGrid();
+}
+
+/*
+ * Take the id of a player piece and a square and places piece centered within table cell square
+ */
+function movePiece(pieceId, squareId) {
+  // id of the div representing a player playing
+  const pieceElem = document.getElementById(pieceId);
+  // id of the div representing a square within the board
+  const squareElem = document.getElementById(squareId);
+
+  const squareCenterPosInGrid = {};
+  squareCenterPosInGrid.xPos =
+    squareElem.offsetLeft + squareElem.offsetWidth / 2;
+  squareCenterPosInGrid.yPos =
+    squareElem.offsetTop + squareElem.offsetHeight / 2;
+
+  pieceElem.style.left =
+    squareCenterPosInGrid.xPos - pieceElem.offsetWidth / 2 + "px";
+  pieceElem.style.top =
+    squareCenterPosInGrid.yPos - pieceElem.offsetHeight / 2 + "px";
+}
+
+/*
+ * Create player piece html elements and add them to the board
+ */
+async function createPlayerHTMLElements() {
+  for (let i = 0; i < players.length; i++) {
+    const playerId = `player${i}`;
+    const playerObj = players[i];
+
+    playerObj.id = playerId;
+    const playerDiv = document.createElement("div");
+    playerDiv.id = playerId;
+    playerDiv.classList.add("board-piece");
+
+    //add dedicated image to board piece div
+    const boardPieceImage = document.createElement("img");
+    boardPieceImage.src = `./../assets/images/board-pieces/${playerId}.png`;
+    boardPieceImage.alt = `player ${i + 1}'s board piece`;
+
+    playerDiv.appendChild(boardPieceImage);
+    boardGridContainer.appendChild(playerDiv);
+
+    movePiece(playerId, "square-1");
+  }
+
+  updateGameMessage(
+    `"${players[currentPlayer].name}" click on the dice to throw it`
+  );
+}
+
+/*
+ * Update player status table
+ */
+function updatePlayerStatus() {
+  //clear table first if any content is inside
+  playerStatusTable.innerHTML = `
+    <tr>
+        <td>Piece</td>
+        <td>Name</td>
+        <td>Square</td>
+    </tr>
+  `;
+
+  const playerRows = [];
+  for (let playerObj of players) {
+    //create row and table data elements
+    const playerRow = document.createElement("tr");
+
+    const pieceImageCell = document.createElement("td");
+    const nameCell = document.createElement("td");
+    const currentSquareCell = document.createElement("td");
+
+    //add dedicated image to cell
+    const boardPieceImage = document.createElement("img");
+    boardPieceImage.src = `./../assets/images/board-pieces/${playerObj.id}.png`;
+    boardPieceImage.alt = `${playerObj.name}'s board piece image`;
+    pieceImageCell.appendChild(boardPieceImage);
+    playerRow.appendChild(pieceImageCell);
+
+    //add player name
+    nameCell.textContent = playerObj.name;
+    playerRow.appendChild(nameCell);
+
+    //add player current square
+    currentSquareCell.textContent = playerObj.currentSquare;
+    playerRow.appendChild(currentSquareCell);
+
+    playerRows.push(playerRow);
+  }
+  playerStatusTable.append(...playerRows);
+}
+
+async function displayGrid() {
   let imageURLs = null;
   try {
     const resp = await fetch(
@@ -53,134 +193,11 @@ const displayGrid = async () => {
   createPlayerHTMLElements();
   updatePlayerStatus();
   boardNameContainer.textContent = boardName;
-};
+}
 
 displayGrid();
 
-let players = [];
-// a value from 0 to 3 dictating which player is next to throw
-let currentPlayer = 0;
-
-function createPlayersAndBoard() {
-  const formQueryString = window.location.search;
-  const formValues = [...new URLSearchParams(formQueryString).values()];
-
-  boardName = formValues.shift();
-  const playerNames = formValues;
-  
-  //remove white spaces and player name values that are empty
-  const playersPlaying = playerNames.map((name) => name.trim()).filter(Boolean);
-
-  for (let name of playersPlaying) {
-    //player object format
-    const playerObj = {
-      name,
-      currentSquare: 1,
-    };
-    players.push(playerObj);
-  }
-  fetchGrid();
-}
-
-/**
- * Takes the id of a player piece and a square and places piece centered within square
- *
- * @param {string} pieceId - id of the div representing a player playing
- * @param {string} squareElem - id of the div representing a square within the board
- */
-function movePiece(pieceId, squareId) {
-  const pieceElem = document.getElementById(pieceId);
-  const squareElem = document.getElementById(squareId);
-
-  const squareCenterPosInGrid = {};
-  squareCenterPosInGrid.xPos =
-    squareElem.offsetLeft + squareElem.offsetWidth / 2;
-  squareCenterPosInGrid.yPos =
-    squareElem.offsetTop + squareElem.offsetHeight / 2;
-
-  pieceElem.style.left =
-    squareCenterPosInGrid.xPos - pieceElem.offsetWidth / 2 + "px";
-  pieceElem.style.top =
-    squareCenterPosInGrid.yPos - pieceElem.offsetHeight / 2 + "px";
-}
-
-const boardGridContainer = document.getElementById("board-grid-container");
-async function createPlayerHTMLElements() {
-  for (let i = 0; i < players.length; i++) {
-    const playerId = `player${i}`;
-    const playerObj = players[i];
-
-    playerObj.id = playerId;
-    const playerDiv = document.createElement("div");
-    playerDiv.id = playerId;
-    playerDiv.classList.add("board-piece");
-
-    //add dedicated image to board piece div
-    const boardPieceImage = document.createElement("img");
-    boardPieceImage.src = `./../assets/images/board-pieces/${playerId}.png`;
-    boardPieceImage.alt = `player ${i + 1}'s board piece`;
-
-    playerDiv.appendChild(boardPieceImage);
-
-    boardGridContainer.appendChild(playerDiv);
-
-    movePiece(playerId, "square-1");
-  }
-
-  updateGameMessage(
-    `"${players[currentPlayer].name}" click on the dice to throw it`
-  );
-}
-
-const playerStatusTable = document.getElementById("player-status");
-
-function updatePlayerStatus() {
-  //clear table first if any content is inside
-  playerStatusTable.innerHTML = `
-    <tr>
-        <td>Piece</td>
-        <td>Name</td>
-        <td>Square</td>
-    </tr>
-  `;
-
-  const playerRows = [];
-  for (let playerObj of players) {
-    const playerRow = document.createElement("tr");
-
-    const pieceImageCell = document.createElement("td");
-    const nameCell = document.createElement("td");
-    const currentSquareCell = document.createElement("td");
-
-    //add dedicated image to name div
-    const boardPieceImage = document.createElement("img");
-    boardPieceImage.src = `./../assets/images/board-pieces/${playerObj.id}.png`;
-    boardPieceImage.alt = `${playerObj.name}'s board piece image`;
-    pieceImageCell.appendChild(boardPieceImage);
-    playerRow.appendChild(pieceImageCell);
-
-    nameCell.textContent = playerObj.name;
-    playerRow.appendChild(nameCell);
-
-    currentSquareCell.textContent = playerObj.currentSquare;
-    playerRow.appendChild(currentSquareCell);
-
-    playerRows.push(playerRow);
-  }
-  playerStatusTable.append(...playerRows);
-}
-
-function updateGameMessage(message) {
-  //clear div first if any content is inside
-  gameMessageContainer.innerHTML = "";
-  const gameMessageDiv = document.createElement("div");
-  gameMessageDiv.textContent = message;
-  gameMessageContainer.appendChild(gameMessageDiv);
-}
-
-const diceButton = document.getElementById("dice");
-
-const throwDice = async () => {
+async function throwDice() {
   const randValue1to6 = Math.ceil(Math.random() * 6);
 
   diceButton.classList.add("dice-throw");
@@ -217,9 +234,8 @@ const throwDice = async () => {
   await new Promise((resolve) => setTimeout(resolve, 2500));
 
   checkAndLoadQuestion();
-
   updatePlayerStatus();
-};
+}
 
 diceButton.addEventListener("click", throwDice);
 
@@ -229,7 +245,7 @@ function checkAndLoadQuestion() {
   const boardInfoElems = boardInfo.grid;
 
   const boardInfoElem = boardInfoElems.find(
-    (boardInfoElem) => boardInfoElem.index === playerCurrentSquare
+    (boardInfoElem) => boardInfoElem.index === playerCurrentSquare - 1
   );
 
   if (!boardInfoElem) {
@@ -291,8 +307,12 @@ function createQuestionPopUp(questionObj) {
         <th>Penalty</th>
     </tr>
     <tr>
-        <td>Move Up ${questionObj.reward} Squares</td>
-        <td>Move Down ${questionObj.penalty} Squares</td>
+        <td>Move Forward ${questionObj.reward} Square${
+    questionObj.reward > 1 ? "s" : ""
+  }</td>
+        <td>Move Backward ${questionObj.penalty} Square${
+    questionObj.penalty > 1 ? "s" : ""
+  }</td>
     </tr>
   `;
 
@@ -306,9 +326,9 @@ async function checkAnswer(event, questionObj) {
   if (button.tagName !== "BUTTON") return;
 
   const answerValue = button.innerHTML;
-  const answerIndex = questionObj.answers.findIndex((answer) => {
-    return answer === answerValue;
-  });
+  const answerIndex = questionObj.answers.findIndex(
+    (answer) => answer === answerValue
+  );
 
   const answersContainer = button.parentElement;
   const allAnswers = Array.from(answersContainer.children);
@@ -340,8 +360,9 @@ async function checkAnswer(event, questionObj) {
     );
   }
 
-  await new Promise((resolve) => setTimeout(resolve, 1500));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
+  //remove question prompt from screen
   document.getElementById("question-backdrop").remove();
 
   const pieceId = playerObj.id;
@@ -364,7 +385,7 @@ async function checkForWinner() {
   const player = players[currentPlayer];
   if (player.currentSquare >= 64) {
     updateGameMessage(`${player.name} has won ${boardName}`);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    history.back();
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    window.location.href = "/client/game-setup.html";
   }
 }
