@@ -10,13 +10,13 @@ async function fullEditForm(name) {
     fetchGrid(name)
     let realGrid = await fetchGridData(name)
 
-    async function changeSquareColour() {
+    const changeSquareColour = () => {
         let squareIndex = parseInt(editSquare.value)
         if(editSquare.value == ""){
             for(i=0; i<64; i++) {
                 let newSquare = document.querySelector(`#square-${i}`)
                     if(realGrid.grid[i].question == null) {
-                        newSquare.className = "empty-square"
+                        newSquare.className = "empty-square"    
                     } else {
                         newSquare.className = "square-question"
                     }               
@@ -56,7 +56,7 @@ async function fullEditForm(name) {
                 }
             }
         } else {
-
+            
         }
     }
     
@@ -71,7 +71,7 @@ async function fullEditForm(name) {
         let rewardNumber = parseInt(e.target.reward.value)
         let penaltyNumber = parseInt(e.target.penalty.value)
         try {
-            for(i=0; i<4; i++){
+            for(let i=0; i<4; i++){
                 if (correctAnswer === answers[i]){
                     correctAnswerIndex = i
                 }
@@ -79,7 +79,7 @@ async function fullEditForm(name) {
             if(correctAnswerIndex != null) {
                 let question = new Question(questionText, answers, correctAnswerIndex, rewardNumber, penaltyNumber)
                 console.log(question)
-                for(i = 0; i< realGrid.grid.length; i++) {
+                for(let i = 0; i< realGrid.grid.length; i++) {
                     if(squareNumberIndex === i){
                         realGrid.grid[i].question = question
                     }
@@ -106,7 +106,7 @@ async function fullEditForm(name) {
     }
 
     const resetQuestion = () => {
-        for(i=0; i<64; i++) {
+        for(let i=0; i<64; i++) {
             let newSquare = document.querySelector(`#square-${i}`)
             if(newSquare.className == "edit-square"){  
                 realGrid.grid[i].question = null
@@ -153,12 +153,12 @@ async function fullEditForm(name) {
     editSquare.addEventListener("keyup", changeSquareColour)
 
     const makeAGrid = () => {
-        
-        questionGenerator([])
+        editSquare.value = ""
+        newApiAssessment([])
     }
 
     const resetGrid = () => {
-        for(i= 0; i<64; i++){
+        for(let i= 0; i<64; i++){
             let newSquare = document.querySelector(`#square-${i}`)
             if(newSquare.className == "square-question"){  
                 realGrid.grid[i].question = null
@@ -168,7 +168,9 @@ async function fullEditForm(name) {
     }
 
     const randomNumberNotUsed = () => {
-        let randomNumber =  Math.floor(Math.random()*64)
+        let arrNumbers = whichSquaresEmpty(realGrid,[])
+        let randomIndex =  Math.floor(Math.random()*arrNumbers.length)
+        let randomNumber = arrNumbers[randomIndex]
         if(realGrid.grid[randomNumber].question == null) {
             return randomNumber
         } else {
@@ -176,9 +178,18 @@ async function fullEditForm(name) {
         }
     }
 
+    const whichSquaresEmpty = (grid, arr) => {
+        for(let i=0; i<64; i++){
+            if(grid.grid[i].question == null){
+                arr.push(i)
+            }
+        }
+        return arr
+    }
+
     const checkEverySquare = () => {
         let filled = true
-        for(i= 0; i<64; i++){
+        for(let i= 0; i<64; i++){
             if(realGrid.grid[i].question == null) {
                 filled = false
             }
@@ -193,53 +204,83 @@ async function fullEditForm(name) {
     let resetGridButton = document.querySelector("#resetgrid")
     resetGridButton.addEventListener("click", resetGrid)
     
-    
-
-    async function questionGenerator(arr) {
+    async function newApiAssessment(arr) {
         if (!checkEverySquare()){
-            const questions = await fetch('https://the-trivia-api.com/v2/questions')
+            let numOfQuestions = Math.floor(Math.random()*41) + 10
+            const questions = await fetch(`https://opentdb.com/api.php?amount=${numOfQuestions}&category=23&type=multiple`)
             if (questions.ok){
                 const questionData = await questions.json()
-                
-                const makeQuestionArray = (arr) => {
-                    for(i=0; i< questionData.length; i++) {
-                        if(questionData[i].category === "history"){
-                            let question = questionData[i].question.text
-                            let answers = questionData[i].incorrectAnswers
-                            let correctAnswer = questionData[i].correctAnswer
-                            answers.push(correctAnswer)
-                            answers.sort()
-                            let correctAnswerIndex = 0
-                            for(j=0; j<4; j++){
-                                if (answers[j] === correctAnswer){
-                                    correctAnswerIndex = j
-                                } else {
-                                    correctAnswerIndex = correctAnswerIndex
-                                }
-                            }
-                            let reward = Math.floor(Math.random()*5) + 1
-                            let penalty = Math.floor(Math.random()*5) + 1
-                            let actualQuestion = new Question(question,answers,correctAnswerIndex,reward,penalty)
-                            arr.push(actualQuestion)
-                            let randomNumber = randomNumberNotUsed()
-                            realGrid.grid[randomNumber].question = actualQuestion
-                            changeSquareColour()
-                            
+                for(let i=0; i< questionData.results.length; i++) {
+                    let question = questionData.results[i].question
+                    let answers = questionData.results[i].incorrect_answers
+                    let correctAnswer = questionData.results[i].correct_answer
+                    answers.push(correctAnswer)
+                    answers.sort()
+                    let correctAnswerIndex = 0
+                    for(let j=0; j<4; j++){
+                        if (answers[j] === correctAnswer){
+                            correctAnswerIndex = j
                         } else {
-                            
+                            correctAnswerIndex = correctAnswerIndex
                         }
                     }
-                    if(arr.length < 48){
-                        questionGenerator(arr)
-                    }
+                    let reward = Math.floor(Math.random()*5) + 1
+                    let penalty = Math.floor(Math.random()*5) + 1
+                    let actualQuestion = new Question(question,answers,correctAnswerIndex,reward,penalty)
+                    arr.push(actualQuestion)
+                    let randomNumber = randomNumberNotUsed()
+                    realGrid.grid[randomNumber].question = actualQuestion
+                    changeSquareColour()
                 }
-                makeQuestionArray(arr)
             }
-        } else {
-            
         }
+    }
 
-    } 
+    // async function questionGenerator(arr) {
+    //     if (!checkEverySquare()){
+    //         const questions = await fetch('https://the-trivia-api.com/v2/questions')
+    //         if (questions.ok){
+    //             const questionData = await questions.json()
+                
+    //             const makeQuestionArray = (arr) => {
+    //                 for(i=0; i< questionData.length; i++) {
+    //                     if(questionData[i].category === "history"){
+    //                         let question = questionData[i].question.text
+    //                         let answers = questionData[i].incorrectAnswers
+    //                         let correctAnswer = questionData[i].correctAnswer
+    //                         answers.push(correctAnswer)
+    //                         answers.sort()
+    //                         let correctAnswerIndex = 0
+    //                         for(j=0; j<4; j++){
+    //                             if (answers[j] === correctAnswer){
+    //                                 correctAnswerIndex = j
+    //                             } else {
+    //                                 correctAnswerIndex = correctAnswerIndex
+    //                             }
+    //                         }
+    //                         let reward = Math.floor(Math.random()*5) + 1
+    //                         let penalty = Math.floor(Math.random()*5) + 1
+    //                         let actualQuestion = new Question(question,answers,correctAnswerIndex,reward,penalty)
+    //                         arr.push(actualQuestion)
+    //                         let randomNumber = randomNumberNotUsed()
+    //                         realGrid.grid[randomNumber].question = actualQuestion
+    //                         changeSquareColour()
+                            
+    //                     } else {
+                            
+    //                     }
+    //                 }
+    //                 if(arr.length < 48){
+    //                     questionGenerator(arr)
+    //                 }
+    //             }
+    //             makeQuestionArray(arr)
+    //         }
+    //     } else {
+            
+    //     }
+
+    // } 
 }
 
 async function fetchGrid(name) {
@@ -332,6 +373,11 @@ const goToPage = (e) => {
     location.reload()
 }
 
+
+
+
+
+//A little bit of code for the game-setup.html page
 const buttons = document.querySelectorAll('.boards button');
 
     buttons.forEach(button => {

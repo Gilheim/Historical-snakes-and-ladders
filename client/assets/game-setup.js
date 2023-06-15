@@ -2,30 +2,32 @@ window.onload = () => {
     loadBoardOptions()
 }
 
-
-
-
 async function loadBoardOptions() {
     try {
         const gridData = await fetch(`http://localhost:3000/grids/names`)
         if (gridData.ok) {
             const data = await gridData.json()
             let boardMenu = document.querySelector(".boards")
-            for(i = 1; i < data.length; i++){
-                let boardButton = document.createElement("button")
-                boardButton.textContent = data[i]
-                boardMenu.appendChild(boardButton)
+            for (i = 1; i < data.length; i++){
+                const optionContainer = document.createElement("div");
+                optionContainer.id = "board-option";
 
+                let boardButton = document.createElement("input")
+                boardButton.type = "radio"
+                boardButton.name = "board-name";
+                boardButton.value = data[i]
+                boardButton.checked = true;
+                boardButton.labels = data[i];
+                optionContainer.appendChild(boardButton)
+
+                let boardName = document.createElement("label");
+                boardName.for = data[i];
+                boardName.innerHTML = data[i];
+
+                optionContainer.appendChild(boardName);
+
+                boardMenu.appendChild(optionContainer);
             }
-            const buttons = document.querySelectorAll('.boards button');
-            buttons.forEach(button => {
-                button.addEventListener('click', () => {
-                    buttons.forEach(btn => btn.classList.remove('clicked'));
-                    button.classList.add('clicked');
-                });
-            });
-        } else {
-            throw "Something went wrong with the API request"
         }
     } catch(e) {
         console.log(e)
