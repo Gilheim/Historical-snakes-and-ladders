@@ -315,7 +315,7 @@ async function createDropdownMenu() {
             for(i=0; i< data.length; i++){
                 let menuItem = document.createElement("a")
                 menuItem.textContent = data[i]
-                menuItem.href = `http://127.0.0.1:5500/client/edit-board.html#${data[i]}`
+                menuItem.href = `http://127.0.0.1:5500/client/edit-pages.html#${data[i]}`
                 dropdownMenu.appendChild(menuItem)
                 menuItem.addEventListener("click", goToPage)
             }
