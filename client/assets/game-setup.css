@@ -35,13 +35,13 @@ h1 {
   color: #fff;
   text-align: center;
   font-size: 1.3vw;
-  height: 72px;
+  height: 7vh;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px;
   padding: 0 1vw;
-  margin-bottom: 24px;
+  margin-bottom: 1.3vh;
   border-radius: 5px;
   border-color: #362419;
   border-width: 10px;
@@ -51,7 +51,7 @@ h1 {
   display: grid;
   place-items: center;
   grid-auto-flow: column;
-  margin-bottom: 60px;
+  margin-bottom: 2vw;
   overflow-x: auto;
 }
 
@@ -103,14 +103,13 @@ h1 {
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
-  font-size: 20px;
+  font-size: 2.2vh;
   text-align: center;
   cursor: pointer;
-  width: 183px;
-  height: 57px;
+  padding: 1vw;
+  min-width: 13vw;
   border-radius: 10px;
   margin: 10px;
-  margin-top: 44px;
   border-radius: 5px;
   border-color: #362419;
   border-width: 10px;
@@ -125,7 +124,7 @@ h1 {
   width: unset;
 }
 
-#board-option
+#board-option,
 .submit,
 #main-menu {
   border-width: 5px;
