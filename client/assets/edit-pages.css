@@ -98,35 +98,59 @@ body {
 }
 
 .save {
-  background-color: #76846a;
+  background-image: url("/client/assets/images/wood-background.jpg");
   justify-content: center;
   align-items: center;
   cursor: pointer;
   margin: 5px auto;
   border-radius: 10px;
-  border: none;
+  border: groove #362419 5px;
   font-size: 20px;
-  color: #000;
+  color: #ffff;
   width: 140px;
   height: 36px;
 }
 
-#randomgridgenerator,
-#resetgrid, #mainmenu{
-  background-color: #04AA6D;
-  color: white;
-  padding: 5px;
-  font-size: 16px;
-  border: none;
+#randomgridgenerator{
+  background-image: url("/client/assets/images/wood-background.jpg");
+    color: #ffff;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 100px;
+    height: 36px;
+    border-radius: 10px;
+    border: groove #362419 5px;
+  
+
+}
+#resetgrid{
+  background-image: url("/client/assets/images/wood-background.jpg");
+  color: #ffff;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 100px;
+    height: 36px;
+    border-radius: 10px;
+    border: groove #362419 5px;
+    margin-left: 5px;
 }
 
-#resetgrid{
-  background-color: #04AA6D;
-  color: white;
-  padding: 5px;
-  font-size: 16px;
-  border: none;
-  margin-left: 5px  ;
+#mainmenu{
+  background-image: url("/client/assets/images/wood-background.jpg");
+  color: #ffff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 100px;
+  height: 36px;
+  border-radius: 10px;
+  border: groove #362419 5px;
+  margin-left: 0px;
 }
 
 table {
