@@ -10,6 +10,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  
 }
 
 #game-container {
@@ -17,12 +18,12 @@ body {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   column-gap: 70px;
-  margin: 38px;
+  margin: 2vw;
 }
 
 #end-game {
   position: absolute;
-  margin: 10px;
+  margin: 0.3vw;
   font-size: 14px;
   color: white;
   cursor: pointer;
@@ -37,7 +38,7 @@ body {
 #outer-board-container {
   display: grid;
   place-items: center;
-  margin: 70px;
+  margin: 3.65vw;
   margin-left: 0;
 }
 
@@ -98,7 +99,7 @@ body {
   top: 0;
   right: 0;
   font-size: 12px;
-  color: black;
+  color: #362419;
 }
 
 .board-piece {
@@ -119,10 +120,9 @@ body {
 #side-panel {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.5fr 1fr;
-  margin: 70px;
+  margin: 3.65vw;
   margin-right: 0;
-  padding: 50px;
+  padding: 2.6vw;
   gap: 30px;
 }
 
@@ -141,6 +141,7 @@ body {
 }
 
 #player-status {
+  font-size: 1vw;
 }
 
 #player-status td {
@@ -149,21 +150,22 @@ body {
 }
 
 #player-status img {
-  width: 50px;
-  padding: 10px;
+  width: 3.2vw;
+  margin: 0.4vw;
 }
 
-#player-status tr > td:first-of-type {
-  width: 40px;
+#player-status tr > td:nth-child(2) {
+  width: 52%;
 }
 
 #game-message {
   grid-column: span 2;
-  font-size: 36px;
+  font-size: 2vw;
   display: grid;
   place-items: center;
   color: white;
   text-align: center;
+  padding: 2vw;
 }
 
 #dice-container {
@@ -228,7 +230,7 @@ body {
 #question-outer-container {
   display: grid;
   place-items: center;
-  height: 50%;
+  height: 60%;
   width: 30%;
 }
 
@@ -285,34 +287,4 @@ body {
   padding: 5px;
   border: 1px solid white;
   text-align: center;
-}
-
-@media screen and (max-width: 1400px) {
-  body {
-    place-items: center;
-  }
-
-  #game-container {
-    grid-template-columns: 1fr;
-  }
-
-  #question-outer-container {
-    display: grid;
-    place-items: center;
-    height: 50%;
-    width: 70%;
-  }
-
-  #board-grid td {
-    width: 2.2em;
-    height: 2.2em;
-  }
-
-  #outer-board-container {
-    margin-left: 70px;
-  }
-
-  #side-panel {
-    margin-right: 70px;
-  }
 }
