@@ -336,5 +336,970 @@
             "question": null
           }
         ]
+      },
+      {
+        "name": "64 questions",
+        "grid": [
+          {
+            "index": 0,
+            "question": {
+              "question": "Which two countries agreed to reunite on February 13th, 1989?",
+              "answers": [
+                "East and West Germany",
+                "North & South Sudan",
+                "North and South Korea",
+                "Vietnam and Cambodia"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 4,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 1,
+            "question": {
+              "question": "Who was the monarch of England during the time period 1327-1377?",
+              "answers": [
+                "Edward III",
+                "Henry III",
+                "John",
+                "Richard III"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 5,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 2,
+            "question": {
+              "question": "When Did Napoleon Bonaparte Begin His Reign As Emperor Of France?",
+              "answers": [
+                "1804",
+                "1819",
+                "1834",
+                "1849"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 5,
+              "penalty": 5
+            }
+          },
+          {
+            "index": 3,
+            "question": {
+              "question": "In What Year Did India Gain Independence From The United Kingdom?",
+              "answers": [
+                "1941",
+                "1947",
+                "1953",
+                "1959"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 5,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 4,
+            "question": {
+              "question": "In which city were the Hanging Gardens?",
+              "answers": [
+                "Atlantis",
+                "Babylon",
+                "Jericho",
+                "Jerusalem"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 2,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 5,
+            "question": {
+              "question": "Which country's troops were defeated by Mexico's army at Puebla in 1862, leading to the celebration of Cinco de Mayo?",
+              "answers": [
+                "England",
+                "France",
+                "Portugal",
+                "Spain"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 3,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 6,
+            "question": {
+              "question": "Who Was Shot Dead In Dallas On 24th November 1963?",
+              "answers": [
+                "John F Kennedy",
+                "John Lennon",
+                "Lee Harvey Oswald",
+                "Ronald Reagan"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 3,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 7,
+            "question": {
+              "question": "Which Spaniard conquered most of Mexico and lead to the downfall of the Aztec Empire?",
+              "answers": [
+                "Christopher Columbus",
+                "Ferdinand Magellan",
+                "Francisco Pizarro",
+                "Hernando Cortez"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 3,
+              "penalty": 1
+            }
+          },
+          {
+            "index": 8,
+            "question": {
+              "question": "What was the name the Romans gave to Great Britain?",
+              "answers": [
+                "Albion",
+                "Britanica",
+                "Britannia",
+                "Roma"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 1,
+              "penalty": 5
+            }
+          },
+          {
+            "index": 9,
+            "question": {
+              "question": "In What Year Did Neil Armstrong First Step Foot On The Moon?",
+              "answers": [
+                "1963",
+                "1965",
+                "1967",
+                "1969"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 5,
+              "penalty": 4
+            }
+          },
+          {
+            "index": 10,
+            "question": {
+              "question": "What started in 1849 when gold was discovered at Sutter's Mill?",
+              "answers": [
+                "The American Civil War",
+                "The California Gold Rush",
+                "The Cuban Revolution",
+                "The Louisiana Purchase"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 1,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 11,
+            "question": {
+              "question": "In which country did the Kemalists oppose the Sultan and eventually prevail in the 1920s?",
+              "answers": [
+                "Egypt",
+                "Iran",
+                "Iraq",
+                "Turkey"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 5,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 12,
+            "question": {
+              "question": "Which river did George Washington famously cross in the American Revolutionary War?",
+              "answers": [
+                "Delaware",
+                "Maryland",
+                "Pennsylvania",
+                "Wilmington"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 5,
+              "penalty": 4
+            }
+          },
+          {
+            "index": 13,
+            "question": {
+              "question": "How many astronauts manned each Apollo flight?",
+              "answers": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 4,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 14,
+            "question": {
+              "question": "What did Napoleon have built to commemorate his victories?",
+              "answers": [
+                "Arc de Triomphe",
+                "Le Louvre",
+                "Notre Dame Cathedral",
+                "The Eiffel Tower"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 2,
+              "penalty": 1
+            }
+          },
+          {
+            "index": 15,
+            "question": {
+              "question": "Germany's WWI allies were Austria-Hungary, Bulgaria, and ________.",
+              "answers": [
+                "Italy",
+                "Russia",
+                "Spain",
+                "Turkey"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 2,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 16,
+            "question": {
+              "question": "What year did the United States enter World War II?",
+              "answers": [
+                "1939",
+                "1941",
+                "1945",
+                "1948"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 5,
+              "penalty": 5
+            }
+          },
+          {
+            "index": 17,
+            "question": {
+              "question": "What did Henry Shrapnel invent?",
+              "answers": [
+                "The exploding shell",
+                "The lightbulb",
+                "The steam engine",
+                "The television"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 3,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 18,
+            "question": {
+              "question": "Who is famous for historically riding naked on horseback through Coventry, England?",
+              "answers": [
+                "Lady Gaga",
+                "Lady Galebe",
+                "Lady Geronimo",
+                "Lady Godiva"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 1,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 19,
+            "question": {
+              "question": "Which Queen of France was beheaded in 1793?",
+              "answers": [
+                "Eleanor of Aquitaine",
+                "Margaret of Provence",
+                "Maria Theresa",
+                "Marie Antoinette"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 1,
+              "penalty": 1
+            }
+          },
+          {
+            "index": 20,
+            "question": {
+              "question": "What daughter of Czar Nicholas II was falsely rumoured to have escaped death in the Russian Revolution?",
+              "answers": [
+                "Anastasia",
+                "Ilyana",
+                "Ivanka",
+                "Natasha"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 2,
+              "penalty": 1
+            }
+          },
+          {
+            "index": 21,
+            "question": {
+              "question": "In March 1979, where did a major nuclear accident occur?",
+              "answers": [
+                "Chernobyl",
+                "Fukushima",
+                "Jaslovské Bohunice",
+                "Three Mile Island"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 3,
+              "penalty": 1
+            }
+          },
+          {
+            "index": 22,
+            "question": {
+              "question": "What was the name of the pandemic which killed over 1% of the world's population in 1918?",
+              "answers": [
+                "Coronavirus",
+                "SARS",
+                "Spanish Flu",
+                "Swine Flu"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 2,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 23,
+            "question": {
+              "question": "In what year did the Treaty of Paris mark the end of the American Revolutionary War?",
+              "answers": [
+                "1725",
+                "1768",
+                "1783",
+                "1799"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 2,
+              "penalty": 1
+            }
+          },
+          {
+            "index": 24,
+            "question": {
+              "question": "In which state was `The Blair Witch Project' set",
+              "answers": [
+                "Baltimore",
+                "Maryland",
+                "Pennsylvania",
+                "Virginia"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 3,
+              "penalty": 1
+            }
+          },
+          {
+            "index": 25,
+            "question": {
+              "question": "Which president was responsible for the Louisiana Purchase?",
+              "answers": [
+                "Franklin",
+                "Jefferson",
+                "Lincoln",
+                "Washington"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 3,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 26,
+            "question": {
+              "question": "Which award did Martin Luther King win in 1964?",
+              "answers": [
+                "A Grammy Award",
+                "An Academy Award",
+                "The Nobel Peace Prize",
+                "The Pulitzer Prize"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 4,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 27,
+            "question": {
+              "question": "Which US City Did British Troops Invade and Burn In 1814?",
+              "answers": [
+                "Atlanta",
+                "Denver",
+                "San Francisco",
+                "Washington D.C."
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 5,
+              "penalty": 4
+            }
+          },
+          {
+            "index": 28,
+            "question": {
+              "question": "In which US State was the site of the 1863 Battle of Gettysburg?",
+              "answers": [
+                "Maryland",
+                "New York",
+                "Pennsylvania",
+                "Virginia"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 3,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 29,
+            "question": {
+              "question": "What country did the allies invade in World War II's Operation Avalanche? ",
+              "answers": [
+                "France",
+                "Germany",
+                "Italy",
+                "Spain"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 3,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 30,
+            "question": {
+              "question": "Who was the 4th president of the USA, in term during the period 1809–1817?",
+              "answers": [
+                "Herbert Hoover",
+                "James Madison",
+                "John Adams",
+                "Zachary Taylor"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 4,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 31,
+            "question": {
+              "question": "In which year was GPS invented?",
+              "answers": [
+                "1956",
+                "1962",
+                "1968",
+                "1974"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 5,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 32,
+            "question": {
+              "question": "What did the Congress of Vienna meet to discuss in 1815?",
+              "answers": [
+                "African colonisation",
+                "Fossil fuel consumption",
+                "The fall of the Soviet Union",
+                "The new European political order"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 1,
+              "penalty": 1
+            }
+          },
+          {
+            "index": 33,
+            "question": {
+              "question": "In What Year Did The Spanish Civil War Begin?",
+              "answers": [
+                "1906",
+                "1916",
+                "1926",
+                "1936"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 2,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 34,
+            "question": {
+              "question": "In which year did the communists come into to power in Beijing following the Chinese Civil War?",
+              "answers": [
+                "1923",
+                "1941",
+                "1949",
+                "1970"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 3,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 35,
+            "question": {
+              "question": "Which war began on June 25, 1950?",
+              "answers": [
+                "The American War of Independence",
+                "The Korean War",
+                "The Vietnam War",
+                "World War II"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 3,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 36,
+            "question": {
+              "question": "What was name of the Titanic's sister ship?",
+              "answers": [
+                "Lucitania",
+                "Mary Rose",
+                "Mauretania",
+                "Olympic"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 5,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 37,
+            "question": {
+              "question": "Which racist organisation was formed in Tennessee in 1865?",
+              "answers": [
+                "The Ku Klux Klan",
+                "The National Front",
+                "The National Socialist Party",
+                "The Proud Boys"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 2,
+              "penalty": 5
+            }
+          },
+          {
+            "index": 38,
+            "question": {
+              "question": "What year did the coronation of Charlemagne as Emperor of the Holy Roman Empire take place?",
+              "answers": [
+                "1100",
+                "1400",
+                "1700",
+                "800"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 2,
+              "penalty": 1
+            }
+          },
+          {
+            "index": 39,
+            "question": {
+              "question": "Which ancient ruler was known as the \"Scourge of God\"?",
+              "answers": [
+                "Attila the Huns",
+                "Ivan the Terrible",
+                "Vlad the Impaler",
+                "Xerxes"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 3,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 40,
+            "question": {
+              "question": "How old was Alexander the Great when he died ?",
+              "answers": [
+                "22",
+                "32",
+                "42",
+                "52"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 5,
+              "penalty": 4
+            }
+          },
+          {
+            "index": 41,
+            "question": {
+              "question": "Which word describes the Nazi genocide of Jews?",
+              "answers": [
+                "Auchterarder",
+                "Blitzkrieg",
+                "Holocaust",
+                "Luftwaffe"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 5,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 42,
+            "question": {
+              "question": "Who was the father of Elizabeth I?",
+              "answers": [
+                "George I",
+                "Henry VI",
+                "Henry VIII",
+                "Richard III"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 3,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 43,
+            "question": {
+              "question": "In 1969 Richard Cawston Made A Documentary For The BBC About Which Famous Family?",
+              "answers": [
+                "The Gibbs",
+                "The Kardashians",
+                "The Osmonds",
+                "The Royal Family"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 2,
+              "penalty": 5
+            }
+          },
+          {
+            "index": 44,
+            "question": {
+              "question": "Who did Stalin allegedly force Norway to expel in 1936 by buying its entire herring catch?",
+              "answers": [
+                "Che Guevara",
+                "Fidel Castro",
+                "Leon Trotsky",
+                "Nikita Khrushchev"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 4,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 45,
+            "question": {
+              "question": "In which WWII battle were four Japanese carriers destroyed?",
+              "answers": [
+                "Iwo Jima",
+                "Midway",
+                "Okinawa",
+                "Pearl Harbour"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 5,
+              "penalty": 4
+            }
+          },
+          {
+            "index": 46,
+            "question": {
+              "question": "What was the official language of the Holy Roman Empire?",
+              "answers": [
+                "German",
+                "Greek",
+                "Latin",
+                "Sanskrit"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 3,
+              "penalty": 5
+            }
+          },
+          {
+            "index": 47,
+            "question": {
+              "question": "In Which Year Did The Falklands Conflict Begin?",
+              "answers": [
+                "1964",
+                "1971",
+                "1982",
+                "1990"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 1,
+              "penalty": 1
+            }
+          },
+          {
+            "index": 48,
+            "question": {
+              "question": "In which year did the Vietnam war begin?",
+              "answers": [
+                "1939",
+                "1947",
+                "1955",
+                "1963"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 1,
+              "penalty": 4
+            }
+          },
+          {
+            "index": 49,
+            "question": {
+              "question": "What treaty, signed in 1713, ended the War of the Spanish Succession?",
+              "answers": [
+                "Treaty of Geneva",
+                "Treaty of Utrecht",
+                "Treaty of Versailles",
+                "Treaty of Yalta"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 4,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 50,
+            "question": {
+              "question": "Where did The Mayflower take the pilgrims?",
+              "answers": [
+                "America",
+                "Rome",
+                "Scotland",
+                "The Moon"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 2,
+              "penalty": 1
+            }
+          },
+          {
+            "index": 51,
+            "question": {
+              "question": "In which year were the first photographs sent from Mars?",
+              "answers": [
+                "1964",
+                "1976",
+                "1990",
+                "2009"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 4,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 52,
+            "question": {
+              "question": "When did the Six Day War redefine the Middle East’s balance of power?",
+              "answers": [
+                "1967",
+                "1977",
+                "1987",
+                "1997"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 1,
+              "penalty": 5
+            }
+          },
+          {
+            "index": 53,
+            "question": {
+              "question": "Which Roman Gladiator Lead An Unsuccessful Revolt Against Rome?",
+              "answers": [
+                "Commodus",
+                "Ithacus",
+                "Maximus",
+                "Spartacus"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 1,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 54,
+            "question": {
+              "question": "Who Was Ptolemy Dionysius Related To As Both Brother And Husband?",
+              "answers": [
+                "Cleopatra",
+                "Hatsheput",
+                "Nefertiti",
+                "Nitocris"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 4,
+              "penalty": 4
+            }
+          },
+          {
+            "index": 55,
+            "question": {
+              "question": "What was the name given to the atom bomb that was dropped on Hiroshima?",
+              "answers": [
+                "Big Boy",
+                "Bonnie Lad",
+                "Chunky Joe",
+                "Fat Man"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 3,
+              "penalty": 4
+            }
+          },
+          {
+            "index": 56,
+            "question": {
+              "question": "Which Roman emperor followed Claudius?",
+              "answers": [
+                "Augustus",
+                "Hadrian",
+                "Justinian",
+                "Nero"
+              ],
+              "correctAnswerIndex": 3,
+              "reward": 1,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 57,
+            "question": {
+              "question": "In which year did Sirimavo Bandaranaike make history as the first woman elected head of a government?",
+              "answers": [
+                "1941",
+                "1960",
+                "1971",
+                "1980"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 4,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 58,
+            "question": {
+              "question": "What was the primary language of the Aztecs?",
+              "answers": [
+                "Mayan",
+                "Mixtec",
+                "Nahuatl",
+                "Otomi"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 1,
+              "penalty": 3
+            }
+          },
+          {
+            "index": 59,
+            "question": {
+              "question": "When did the scientist Tim Berners-Lee invent the World Wide Web?",
+              "answers": [
+                "1984",
+                "1989",
+                "1994",
+                "1999"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 3,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 60,
+            "question": {
+              "question": "Who Was Quoted As Saying \"Ask Not What Your Country Can Do For You But What You Can Do For Your Country''?",
+              "answers": [
+                "Henry VIII",
+                "John F Kennedy",
+                "Josef Stalin",
+                "Winston Churchill"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 2,
+              "penalty": 5
+            }
+          },
+          {
+            "index": 61,
+            "question": {
+              "question": "In 1447, Johannes Gutenberg invented the printing press. What was the first book he produced?",
+              "answers": [
+                "Don Quixote",
+                "Macbeth",
+                "The Bible",
+                "The Magna Carta"
+              ],
+              "correctAnswerIndex": 2,
+              "reward": 1,
+              "penalty": 1
+            }
+          },
+          {
+            "index": 62,
+            "question": {
+              "question": "Who Was Quoted As Saying \"Ask Not What Your Country Can Do For You But What You Can Do For Your Country''?",
+              "answers": [
+                "Henry VIII",
+                "John F Kennedy",
+                "Josef Stalin",
+                "Winston Churchill"
+              ],
+              "correctAnswerIndex": 1,
+              "reward": 2,
+              "penalty": 2
+            }
+          },
+          {
+            "index": 63,
+            "question": {
+              "question": "Which Spanish conquistador's expedition marked the first European sighting of the Grand Canyon?",
+              "answers": [
+                "Francisco Coronado",
+                "Francisco Pizzaro",
+                "Hernando de Soto",
+                "Jose Garrido"
+              ],
+              "correctAnswerIndex": 0,
+              "reward": 3,
+              "penalty": 3
+            }
+          }
+        ]
       }
 ]
