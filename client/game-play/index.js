@@ -327,7 +327,7 @@ async function checkAnswer(event, questionObj) {
     updateGameMessage(
       `${players[currentPlayer].name}'s answer was correct. ${
         players[currentPlayer].name
-      } progresses by ${reward} square${penalty > 1 ? "s" : ""}`
+      } progresses by ${reward} square${reward > 1 ? "s" : ""}`
     );
   } else {
     const penalty = questionObj.penalty;
