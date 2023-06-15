@@ -20,14 +20,13 @@ body {
     height: 40px;
     text-align: center;
     border: 2px solid;
-    background-color: white;
 }
 
 .square-question {
   font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
   border-color: black;
   width: 40px;
-  height: 40px; 
+  height: 40px;
   text-align: center;
   border: 2px solid;
   background-color: red;
@@ -51,7 +50,7 @@ body {
   font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
   border-color: black;
   width: 40px;
-  height: 40px; 
+  height: 40px;
   text-align: center;
   border: 2px solid;
   background-color: turquoise;
