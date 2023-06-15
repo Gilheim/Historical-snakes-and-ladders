@@ -10,21 +10,6 @@ body {
     padding: 25px 0;
   }
 
-  /* form{
-    background-image: url("/client/assets/images/wood-background.jpg");
-    display: flex;
-    place-self: stretch;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 40px 15px 0px 45px;
-    border: groove #362419 10px;
-    border-radius: 5px;
-    width: 367px;
-  } */
-
   #formcontainer {
     background-image: url("/client/assets/images/wood-background.jpg");
     display: flex;
@@ -118,11 +103,12 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    width: 100px;
-    height: 36px;
+    width: 108px;
+    height: 50px;
     border-radius: 10px;
     border: groove #362419 5px;
-  
+    margin-right: 5px;
+    margin-bottom: 2px;
 
 }
 #resetgrid{
@@ -132,8 +118,8 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    width: 100px;
-    height: 36px;
+    width: 108px;
+    height: 50px;
     border-radius: 10px;
     border: groove #362419 5px;
     margin-left: 5px;
@@ -146,11 +132,12 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  font-size: 14px;
   width: 100px;
-  height: 36px;
+  height: 41px;
   border-radius: 10px;
   border: groove #362419 5px;
-  margin-left: 0px;
+  margin-left: 10px;
 }
 
 table {
