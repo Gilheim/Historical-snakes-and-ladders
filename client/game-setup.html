@@ -9,6 +9,7 @@
 </head>
 <body>
     <form id="player-form" action="/client/game-play/index.html">
+        <h1>Select A Board To Play On</h1>
         <div class="boards"></div>
         <div id="player-name-inputs">
             <h1>Enter Player Names</h1>
@@ -18,8 +19,7 @@
             <input name="player4" type="text" class="player-name" placeholder="Player 4">
             <button class="submit" type="submit">Start game</button>
         </div>
-        
     </form>
-    <button id="main-menu" onclick="history.back();">Go Back To Main Menu</button>
+    <button id="main-menu" onclick="window.location.href='/client/main-menu.html';">Go Back To Main Menu</button>
 </body>
 </html>

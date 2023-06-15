@@ -23,6 +23,8 @@ body {
   display: grid;
   flex-direction: column;
   align-items: center;
+  width: 20vw;
+  margin: auto;
 }
 
 h1 {
@@ -32,12 +34,13 @@ h1 {
   background-size: cover;
   color: #fff;
   text-align: center;
-  font-size: 32px;
+  font-size: 1.3vw;
   height: 72px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px;
+  padding: 0 1vw;
   margin-bottom: 24px;
   border-radius: 5px;
   border-color: #362419;
@@ -49,6 +52,7 @@ h1 {
   place-items: center;
   grid-auto-flow: column;
   margin-bottom: 60px;
+  overflow-x: auto;
 }
 
 #board-option {
@@ -68,8 +72,7 @@ h1 {
   color: #fff;
 
   border-radius: 5px;
-  border-width: 10px;
-  border-style: groove;
+  border-width: 5px;
 }
 
 #board-option:has(input[type="radio"]:checked) {
@@ -120,4 +123,17 @@ h1 {
   left: 0;
   margin: 20px;
   width: unset;
+}
+
+#board-option
+.submit,
+#main-menu {
+  border-width: 5px;
+  border-style: outset;
+}
+
+.submit:hover,
+#board-option:hover,
+#main-menu:hover {
+  border-style: inset;
 }
