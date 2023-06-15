@@ -65,9 +65,9 @@ function createPlayersAndBoard() {
   const formQueryString = window.location.search;
   const formValues = [...new URLSearchParams(formQueryString).values()];
 
-  boardName = "test grid";
+  boardName = formValues.shift();
   const playerNames = formValues;
-  formValues.pop();
+  
   //remove white spaces and player name values that are empty
   const playersPlaying = playerNames.map((name) => name.trim()).filter(Boolean);
 
