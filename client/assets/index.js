@@ -231,6 +231,8 @@ async function fullEditForm(name) {
                     changeSquareColour()
                 }
             }
+        } else {
+            alert("Grid is full!")
         }
     }
 
