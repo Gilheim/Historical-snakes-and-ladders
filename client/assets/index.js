@@ -217,18 +217,20 @@ async function fullEditForm(name) {
                     let correctAnswer = questionData.results[i].correct_answer
                     answers.push(correctAnswer)
                     answers.sort()
-                    let correctAnswerIndex = 0
+                    let correctAnswerIndex = -1
                     for(let j=0; j<4; j++){
                         if (answers[j] === correctAnswer){
                             correctAnswerIndex = j
                         }
                     }
-                    let reward = Math.floor(Math.random()*5) + 1
-                    let penalty = Math.floor(Math.random()*5) + 1
-                    let actualQuestion = new Question(question,answers,correctAnswerIndex,reward,penalty)
-                    let randomNumber = randomNumberNotUsed()
-                    realGrid.grid[randomNumber].question = actualQuestion
-                    changeSquareColour()
+                    if(correctAnswerIndex != -1){
+                        let reward = Math.floor(Math.random()*5) + 1
+                        let penalty = Math.floor(Math.random()*5) + 1
+                        let actualQuestion = new Question(question,answers,correctAnswerIndex,reward,penalty)
+                        let randomNumber = randomNumberNotUsed()
+                        realGrid.grid[randomNumber].question = actualQuestion
+                        changeSquareColour()
+                    }
                 }
             }
         } else {
