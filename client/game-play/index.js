@@ -66,7 +66,7 @@ function createPlayersAndBoard() {
     //player object format
     const playerObj = {
       name,
-      currentSquare: 55,
+      currentSquare: 1,
       id: null,
     };
     players.push(playerObj);
