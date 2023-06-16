@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+
+* {
+  font-family: "Spectral";
+}
+
 body {
   background-image: url("/client/assets/images/history-wallpaper.png");
   background-position: center;
@@ -9,14 +15,19 @@ body {
   justify-content: center;
   height: 100vh;
   margin: 0;
-  font-family: Arial, sans-serif;
+}
+
+#player-form {
+    max-width: 65vw;
 }
 
 .player-name {
-  margin: 6px 15px;
-  height: 27px;
-  border-radius: 5px;
-  border: solid;
+  margin: 6px 10px;
+  padding: 5px;
+  font-size: 0.9vw;
+  border-style: groove;
+  border-width: 5px;
+  border-color: black;
 }
 
 #player-name-inputs {
@@ -24,6 +35,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 20vw;
+  max-width: 40vw;
   margin: auto;
 }
 
@@ -68,7 +80,7 @@ h1 {
   background-repeat: no-repeat;
   background-size: cover;
   border-color: #362419;
-  font-size: 1.2vw;
+  font-size: 1.1vw;
   color: #fff;
 
   border-radius: 5px;
@@ -103,10 +115,10 @@ h1 {
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
-  font-size: 2.2vh;
+  font-size: 1vw;
   text-align: center;
   cursor: pointer;
-  padding: 1vw;
+  padding: 0.6vw;
   min-width: 13vw;
   border-radius: 10px;
   margin: 10px;

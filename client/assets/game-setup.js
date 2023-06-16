@@ -7,6 +7,7 @@ async function loadBoardOptions() {
         const gridData = await fetch(`http://localhost:3000/grids/names`)
         if (gridData.ok) {
             const data = await gridData.json()
+            data.push("Random History Trivia");
             let boardMenu = document.querySelector(".boards")
             for (i = 1; i < data.length; i++){
                 const optionContainer = document.createElement("div");

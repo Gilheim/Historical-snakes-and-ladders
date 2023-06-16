@@ -31,11 +31,17 @@ function updateGameMessage(message) {
  */
 async function fetchGrid() {
   try {
-    const gridData = await fetch(`http://localhost:3000/grids/${boardName}`);
-
-    const data = await gridData.json();
-    //remove all board info objects with out question data
-    data.grid = data.grid.filter((boardInfoElem) => boardInfoElem.question);
+    let gridData;
+    let data;
+    if (boardName == "Random History Trivia") {
+      gridData = await fetch(`http://localhost:3000/200questions`);
+      data = await gridData.json();
+    } else {
+      gridData = await fetch(`http://localhost:3000/grids/${boardName}`);
+      data = await gridData.json();
+      //remove all board info objects with out question data
+      data.grid = data.grid.map((boardInfoElem) => boardInfoElem.question ? boardInfoElem.question : null);
+    }
     boardInfo = data;
   } catch (e) {
     console.log(e);
@@ -52,7 +58,7 @@ function createPlayersAndBoard() {
   //get board name from form values
   boardName = formValues.shift();
   const playerNames = formValues;
-
+  
   //remove white spaces and player name values that are empty
   const playersPlaying = playerNames.map((name) => name.trim()).filter(Boolean);
 
@@ -60,7 +66,7 @@ function createPlayersAndBoard() {
     //player object format
     const playerObj = {
       name,
-      currentSquare: 1,
+      currentSquare: 55,
       id: null,
     };
     players.push(playerObj);
@@ -111,7 +117,7 @@ async function createPlayerHTMLElements() {
     playerDiv.appendChild(boardPieceImage);
     boardGridContainer.appendChild(playerDiv);
 
-    movePiece(playerId, "square-1");
+    movePiece(playerId, `square-${players[i].currentSquare}`);
   }
 
   updateGameMessage(
@@ -126,9 +132,9 @@ function updatePlayerStatus() {
   //clear table first if any content is inside
   playerStatusTable.innerHTML = `
     <tr>
-        <td>Piece</td>
-        <td>Name</td>
-        <td>Square</td>
+        <th>Piece</th>
+        <th>Name</th>
+        <th>Square</th>
     </tr>
   `;
 
@@ -233,6 +239,7 @@ async function throwDice() {
 
   await new Promise((resolve) => setTimeout(resolve, 2500));
 
+  await checkForWinner();
   checkAndLoadQuestion();
   updatePlayerStatus();
 }
@@ -244,23 +251,24 @@ function checkAndLoadQuestion() {
   const playerCurrentSquare = playerObj.currentSquare;
   const boardInfoElems = boardInfo.grid;
 
-  const boardInfoElem = boardInfoElems.find(
-    (boardInfoElem) => boardInfoElem.index === playerCurrentSquare - 1
-  );
+  console.log(boardInfoElems);
+  const triviaObj = boardInfoElems[playerCurrentSquare - 1];
 
-  if (!boardInfoElem) {
+  console.log(triviaObj);
+  if (!triviaObj) {
     //update the current player next to throw the dice
     currentPlayer = (currentPlayer + 1) % players.length;
     updateGameMessage(
       `It's ${players[currentPlayer].name}'s turn to throw now`
     );
     diceButton.disabled = false;
-    console.log(currentPlayer);
+    
     return;
   }
 
-  const questionObj = boardInfoElem.question;
-  createQuestionPopUp(questionObj);
+  createQuestionPopUp(triviaObj);
+
+  if (boardName == "Random History Trivia") boardInfo.grid.splice(playerCurrentSquare - 1, 1);
 }
 
 const pageBody = document.body;
@@ -307,10 +315,10 @@ function createQuestionPopUp(questionObj) {
         <th>Penalty</th>
     </tr>
     <tr>
-        <td>Move Forward ${questionObj.reward} Square${
+        <td>Progress By ${questionObj.reward} Square${
     questionObj.reward > 1 ? "s" : ""
   }</td>
-        <td>Move Backward ${questionObj.penalty} Square${
+        <td>Regress By ${questionObj.penalty} Square${
     questionObj.penalty > 1 ? "s" : ""
   }</td>
     </tr>
@@ -371,13 +379,14 @@ async function checkAnswer(event, questionObj) {
 
   await new Promise((resolve) => setTimeout(resolve, 2500));
 
+  await checkForWinner();
+
   //update the current player next to throw the dice
   currentPlayer = (currentPlayer + 1) % players.length;
 
   updatePlayerStatus();
   updateGameMessage(`It's ${players[currentPlayer].name}'s turn to throw now`);
-
-  checkForWinner();
+  
   diceButton.disabled = false;
 }
 
@@ -385,6 +394,7 @@ async function checkForWinner() {
   const player = players[currentPlayer];
   if (player.currentSquare >= 64) {
     updateGameMessage(`${player.name} has won ${boardName}`);
+    boardInfo = {};
     await new Promise((resolve) => setTimeout(resolve, 3000));
     window.location.href = "/client/game-setup.html";
   }

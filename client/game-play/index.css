@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
 * {
-  font-family: "Arial", Arial, sans-serif;
+  font-family: "Spectral";
 }
 
 body {
@@ -22,22 +24,24 @@ body {
 
 #end-game {
   position: absolute;
-  margin: 0.3vw;
-  font-size: 14px;
+  margin: 0.48vw;
+  font-size: 0.8vw;
   color: white;
   cursor: pointer;
-  padding: 4px;
   border-width: 2px !important;
+  border-style: outset;
+  border-radius: 0 !important;
 }
 
 #end-game:hover {
   color: red;
+  border-style: inset;
 }
 
 #outer-board-container {
   display: grid;
   place-items: center;
-  margin: 3.65vw;
+  margin: 3.4vw;
   margin-left: 0;
 }
 
@@ -70,7 +74,7 @@ body {
 }
 
 #board h1 {
-  color: whitesmoke;
+  color: white;
 }
 
 #board-grid-container {
@@ -97,7 +101,7 @@ body {
   padding: 5px;
   top: 0;
   right: 0;
-  font-size: 12px;
+  font-size: 0.7vw;
   color: #362419;
 }
 
@@ -119,7 +123,7 @@ body {
 #side-panel {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 3.65vw;
+  margin: 3.4vw;
   margin-right: 0;
   padding: 2.6vw;
   gap: 30px;
@@ -143,14 +147,15 @@ body {
   font-size: 1vw;
 }
 
+#player-status th,
 #player-status td {
+  padding: 0.3vw;
   text-align: center;
   border: 2px solid;
 }
 
 #player-status img {
   width: 3.2vw;
-  margin: 0.4vw;
 }
 
 #player-status tr > td:nth-child(2) {
@@ -164,7 +169,7 @@ body {
   place-items: center;
   color: white;
   text-align: center;
-  padding: 2vw;
+  padding: 1vw;
 }
 
 #dice-container {
@@ -229,7 +234,7 @@ body {
 #question-outer-container {
   display: grid;
   place-items: center;
-  height: 65%;
+  min-height: 65%;
   width: 35%;
 }
 
@@ -237,7 +242,6 @@ body {
   display: grid;
   place-items: center;
   row-gap: 30px;
-  height: 80%;
   width: 80%;
   color: white;
 }
