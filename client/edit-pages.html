@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./assets/index.js" defer></script>
+    <link rel="stylesheet" href="./assets/edit-pages.css">
+    <link rel="stylesheet" href="./assets/index.css">
+    <title>Edit Page</title>
+</head>
+<body id = "editpage">
+    <section id="board-and-form">
+        <div id = "formcontainer">
+        <form id = "gridform">
+            <label for="board-name">Enter Board Name</label>
+            <input name="boardname" class="Input" type="text" placeholder="e.g. Barbara Liskov board" required>
+            <button type=submit value="submit" class = "save"> Save Grid</button>
+            </form>
+            <form id ="questionform">
+                <label for="square-number" class="inputtype">Enter Square Number</label>
+                <input name="squaretoedit" class="Input" type="text" placeholder="37" required>
+                <label for="question">Enter Question</label>
+                    <input name="question" class="Input" type="text" placeholder="e.g. When was Barbara Liskov born?" required>
+                <label for="answers">Enter Answers</label>
+                    <input name="answer1" class="Input" type="text" placeholder="1937" required>
+                    <input name="answer2" class="Input" type="text" placeholder="1938" required>
+                    <input name="answer3" class="Input" type="text" placeholder="1939" required>
+                    <input name="answer4" class="Input" type="text" placeholder="1940" required>
+                <label for="correct-answer">Enter Correct Answer</label>
+                    <input name="correctAnswer" id="correctAnswer" class="Input" type="text" placeholder="correct answer" required>
+                <label for="right-answer-reward">Right Answer Reward</label>
+                    <input name="reward" id="reward" class="Input" type="text" placeholder="8" required>
+                <label for="wrong-answer-penalty">Wrong Answer Penalty</label>
+                    <input name="penalty" id="penalty" class="Input" type="text" placeholder="4" required>
+                <div id = "form-buttons" class= "form-buttons">
+                    <button type=submit value="submit" name = "addtogrid" class="add-button"> Add to grid</button>
+                    <button type=reset value="reset" class="reset-button"> Reset</button>
+                </div>
+            </form>
+            <div id = "form-buttons" class= "form-buttons">
+                <button id = "randomgridgenerator">Random Grid</button>
+                <button id = "resetgrid">Reset Grid</button>
+            </div>
+            <div id = "form-buttons" class= "form-buttons">
+            <div class="dropdown">
+                <button class="dropbtn">Change grid</button>
+                <div class="dropdown-content">
+            </div>
+            </div>
+            <a id="mainmenu" href = "http://127.0.0.1:5500/client/main-menu.html">Main Menu</a>
+            </div>
+            </div>
+            
+        </div>
+    </section>
+</body>
+</html>
