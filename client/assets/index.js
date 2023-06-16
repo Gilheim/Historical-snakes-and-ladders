@@ -9,6 +9,8 @@ const section = document.querySelector("section")
 async function fullEditForm(name) {
     fetchGrid(name)
     let realGrid = await fetchGridData(name)
+
+
     const changeSquareColour = () => {
         let squareIndex = parseInt(editSquare.value)
         if(editSquare.value == ""){
@@ -153,7 +155,7 @@ async function fullEditForm(name) {
 
     const makeAGrid = () => {
         editSquare.value = ""
-        newApiAssessment([])
+        generateRandomGrid()
     }
 
     const resetGrid = () => {
@@ -203,7 +205,7 @@ async function fullEditForm(name) {
     let resetGridButton = document.querySelector("#resetgrid")
     resetGridButton.addEventListener("click", resetGrid)
     
-    async function newApiAssessment(arr) {
+    async function generateRandomGrid() {
         if (!checkEverySquare()){
             let numOfQuestions = Math.floor(Math.random()*41) + 10
             const questions = await fetch(`https://opentdb.com/api.php?amount=${numOfQuestions}&category=23&type=multiple`)
@@ -219,14 +221,11 @@ async function fullEditForm(name) {
                     for(let j=0; j<4; j++){
                         if (answers[j] === correctAnswer){
                             correctAnswerIndex = j
-                        } else {
-                            correctAnswerIndex = correctAnswerIndex
                         }
                     }
                     let reward = Math.floor(Math.random()*5) + 1
                     let penalty = Math.floor(Math.random()*5) + 1
                     let actualQuestion = new Question(question,answers,correctAnswerIndex,reward,penalty)
-                    arr.push(actualQuestion)
                     let randomNumber = randomNumberNotUsed()
                     realGrid.grid[randomNumber].question = actualQuestion
                     changeSquareColour()
