@@ -208,30 +208,36 @@ async function fullEditForm(name) {
     async function generateRandomGrid() {
         if (!checkEverySquare()){
             let numOfQuestions = Math.floor(Math.random()*41) + 10
-            const questions = await fetch(`https://opentdb.com/api.php?amount=${numOfQuestions}&category=23&type=multiple`)
-            if (questions.ok){
-                const questionData = await questions.json()
-                for(let i=0; i< questionData.results.length; i++) {
-                    let question = questionData.results[i].question
-                    let answers = questionData.results[i].incorrect_answers
-                    let correctAnswer = questionData.results[i].correct_answer
-                    answers.push(correctAnswer)
-                    answers.sort()
-                    let correctAnswerIndex = -1
-                    for(let j=0; j<4; j++){
-                        if (answers[j] === correctAnswer){
-                            correctAnswerIndex = j
+            try {
+                const questions = await fetch(`https://opentdb.com/api.php?amount=${numOfQuestions}&category=23&type=multiple`)
+                if (questions.ok){
+                    const questionData = await questions.json()
+                    for(let i=0; i< questionData.results.length; i++) {
+                        let question = questionData.results[i].question
+                        let answers = questionData.results[i].incorrect_answers
+                        let correctAnswer = questionData.results[i].correct_answer
+                        answers.push(correctAnswer)
+                        answers.sort()
+                        let correctAnswerIndex = -1
+                        for(let j=0; j<4; j++){
+                            if (answers[j] === correctAnswer){
+                                correctAnswerIndex = j
+                            }
+                        }
+                        if(correctAnswerIndex != -1){
+                            let reward = Math.floor(Math.random()*5) + 1
+                            let penalty = Math.floor(Math.random()*5) + 1
+                            let actualQuestion = new Question(question,answers,correctAnswerIndex,reward,penalty)
+                            let randomNumber = randomNumberNotUsed()
+                            realGrid.grid[randomNumber].question = actualQuestion
+                            changeSquareColour()
                         }
                     }
-                    if(correctAnswerIndex != -1){
-                        let reward = Math.floor(Math.random()*5) + 1
-                        let penalty = Math.floor(Math.random()*5) + 1
-                        let actualQuestion = new Question(question,answers,correctAnswerIndex,reward,penalty)
-                        let randomNumber = randomNumberNotUsed()
-                        realGrid.grid[randomNumber].question = actualQuestion
-                        changeSquareColour()
-                    }
+                } else {
+                    throw "Something went wrong with the API request"
                 }
+            } catch (e) {
+                alert(e)
             }
         } else {
             alert("Grid is full!")
