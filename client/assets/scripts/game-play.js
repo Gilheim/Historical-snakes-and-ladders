@@ -57,7 +57,7 @@ async function fetchGrid() {
 /*
  * Initialise player data object array and board name and then run the fetch grid function
  */
-function createPlayersAndBoard() {
+async function createPlayersAndBoard() {
   const formQueryString = window.location.search;
   const formValues = [...new URLSearchParams(formQueryString).values()];
 
@@ -78,7 +78,9 @@ function createPlayersAndBoard() {
     players.push(playerObj);
   }
 
-  fetchGrid();
+  console.log(playerNames);
+  await fetchGrid();
+  colorSquares();
 }
 
 /*
@@ -173,7 +175,7 @@ function updatePlayerStatus() {
   playerStatusTable.append(...playerRows);
 }
 
-async function displayGrid() {
+async function colorSquares() {
   let imageURLs = null;
   try {
     const resp = await fetch(
@@ -185,15 +187,23 @@ async function displayGrid() {
     console.log(error);
   }
 
+  if (!imageURLs) return;
+
+  const allSquares = document.getElementById("board-grid").querySelectorAll("td");
+  for (const square of allSquares) {
+    const squareVal = +square.id.split("-")[1];
+      square.style.backgroundImage = boardInfo.grid[squareVal - 1] ? `linear-gradient(rgba(255,252,201, 0.7),rgba(255,252,201, 0.7)), url('${
+        imageURLs[squareVal - 1]
+      }')` : `url("/assets/images/cream-coloured-wood-texture.jpg")`;
+  }
+}
+
+async function displayGrid() {
   let cellCount = 1;
   for (let i = 0; i < 8; i++) {
     const gridRow = document.createElement("tr");
     for (let j = 0; j < 8; j++) {
       const cell = document.createElement("td");
-      if (imageURLs)
-        cell.style.backgroundImage = `linear-gradient(rgba(255,252,201, 0.7),rgba(255,252,201, 0.7)), url('${
-          imageURLs[cellCount - 1]
-        }')`;
       cell.innerHTML = `<div>${cellCount}</div>`;
       cell.id = "square-" + cellCount++;
       gridRow.appendChild(cell);
@@ -272,11 +282,9 @@ function checkAndLoadQuestion() {
 
   createQuestionPopUp(triviaObj);
 
-  if (boardName == "Random History Trivia") {
-    square = document.getElementById(`square-${playerCurrentSquare}`);
-    square.style.backgroundImage = `url("/assets/images/cream-coloured-wood-texture.jpg")`;
-    boardInfo.grid.splice(playerCurrentSquare - 1, 1, null);
-  }
+  square = document.getElementById(`square-${playerCurrentSquare}`);
+  square.style.backgroundImage = `url("/assets/images/cream-coloured-wood-texture.jpg")`;
+  boardInfo.grid.splice(playerCurrentSquare - 1, 1, null);
 }
 
 const pageBody = document.body;
