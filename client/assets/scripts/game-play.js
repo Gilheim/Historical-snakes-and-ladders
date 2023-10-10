@@ -34,13 +34,19 @@ async function fetchGrid() {
     let gridData;
     let data;
     if (boardName == "Random History Trivia") {
-      gridData = await fetch(`http://localhost:3000/200questions`);
+      gridData = await fetch(
+        `https://historical-snakes-and-ladders-api.onrender.com/200questions`
+      );
       data = await gridData.json();
     } else {
-      gridData = await fetch(`http://localhost:3000/grids/${boardName}`);
+      gridData = await fetch(
+        `https://historical-snakes-and-ladders-api.onrender.com/grids/${boardName}`
+      );
       data = await gridData.json();
       //remove all board info objects with out question data
-      data.grid = data.grid.map((boardInfoElem) => boardInfoElem.question ? boardInfoElem.question : null);
+      data.grid = data.grid.map((boardInfoElem) =>
+        boardInfoElem.question ? boardInfoElem.question : null
+      );
     }
     boardInfo = data;
   } catch (e) {
@@ -58,7 +64,7 @@ function createPlayersAndBoard() {
   //get board name from form values
   boardName = formValues.shift();
   const playerNames = formValues;
-  
+
   //remove white spaces and player name values that are empty
   const playersPlaying = playerNames.map((name) => name.trim()).filter(Boolean);
 
@@ -260,7 +266,7 @@ function checkAndLoadQuestion() {
       `It's ${players[currentPlayer].name}'s turn to throw now`
     );
     diceButton.disabled = false;
-    
+
     return;
   }
 
@@ -268,10 +274,10 @@ function checkAndLoadQuestion() {
 
   if (boardName == "Random History Trivia") {
     square = document.getElementById(`square-${playerCurrentSquare}`);
-    square.style.backgroundImage = `url("/client/assets/images/cream-coloured-wood-texture.jpg")`
-    console.log(square)
-    boardInfo.grid.splice(playerCurrentSquare - 1, 1, null)
-  };
+    square.style.backgroundImage = `url("/client/assets/images/cream-coloured-wood-texture.jpg")`;
+    console.log(square);
+    boardInfo.grid.splice(playerCurrentSquare - 1, 1, null);
+  }
 }
 
 const pageBody = document.body;
@@ -389,7 +395,7 @@ async function checkAnswer(event, questionObj) {
 
   updatePlayerStatus();
   updateGameMessage(`It's ${players[currentPlayer].name}'s turn to throw now`);
-  
+
   diceButton.disabled = false;
 }
 
