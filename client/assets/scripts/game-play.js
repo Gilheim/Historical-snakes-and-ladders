@@ -275,7 +275,6 @@ function checkAndLoadQuestion() {
   if (boardName == "Random History Trivia") {
     square = document.getElementById(`square-${playerCurrentSquare}`);
     square.style.backgroundImage = `url("/assets/images/cream-coloured-wood-texture.jpg")`;
-    console.log(square);
     boardInfo.grid.splice(playerCurrentSquare - 1, 1, null);
   }
 }

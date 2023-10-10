@@ -10,10 +10,10 @@ async function loadBoardOptions() {
     if (gridData.ok) {
       const data = await gridData.json();
       data.push("Random History Trivia");
-      let boardMenu = document.querySelector(".boards");
+      let boardMenu = document.querySelector("#boards");
       for (i = 1; i < data.length; i++) {
         const optionContainer = document.createElement("div");
-        optionContainer.id = "board-option";
+        optionContainer.className = "board-option";
 
         let boardButton = document.createElement("input");
         boardButton.type = "radio";

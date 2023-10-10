@@ -1,20 +1,24 @@
 window.onload = () => {
-  let realGridName = window.location.hash.substr(1);
+  let realGridName = window.location.hash.substr(1) || "blank grid";
   fullEditForm(realGridName);
   createDropdownMenu();
 };
 
-const section = document.querySelector("section");
+const main = document.querySelector("main");
 
+const editSquare = document.getElementsByName("squaretoedit")[0];
+
+let realGrid;
 async function fullEditForm(name) {
   fetchGrid(name);
-  let realGrid = await fetchGridData(name);
+  realGrid = await fetchGridData(name);
 
   const changeSquareColour = () => {
+    const editSquare = document.getElementsByName("squaretoedit")[0];
     let squareIndex = parseInt(editSquare.value);
     if (editSquare.value == "") {
       for (i = 0; i < 64; i++) {
-        let newSquare = document.querySelector(`#square-${i}`);
+        let newSquare = document.querySelector(`#square-${i+1}`);
         if (realGrid.grid[i].question == null) {
           newSquare.className = "empty-square";
         } else {
@@ -22,48 +26,46 @@ async function fullEditForm(name) {
         }
       }
     } else if (Number.isNaN(squareIndex) === false) {
-      let realIndex = squareIndex - 1;
+      let realIndex = squareIndex;
       let square = document.querySelector(`#square-${realIndex}`);
       square.className = "edit-square";
       if (realGrid.grid[realIndex].question != null) {
-        document.querySelector("#questionform").question.value =
+        document.querySelector("#question-form").question.value =
           realGrid.grid[realIndex].question.question;
-        document.querySelector("#questionform").answer1.value =
+        document.querySelector("#question-form").answer1.value =
           realGrid.grid[realIndex].question.answers[0];
-        document.querySelector("#questionform").answer2.value =
+        document.querySelector("#question-form").answer2.value =
           realGrid.grid[realIndex].question.answers[1];
-        document.querySelector("#questionform").answer3.value =
+        document.querySelector("#question-form").answer3.value =
           realGrid.grid[realIndex].question.answers[2];
-        document.querySelector("#questionform").answer4.value =
+        document.querySelector("#question-form").answer4.value =
           realGrid.grid[realIndex].question.answers[3];
         let idx = realGrid.grid[realIndex].question.correctAnswerIndex;
-        document.querySelector("#questionform").correctAnswer.value =
+        document.querySelector("#question-form").correctAnswer.value =
           realGrid.grid[realIndex].question.answers[idx];
-        document.querySelector("#questionform").reward.value =
+        document.querySelector("#question-form").reward.value =
           realGrid.grid[realIndex].question.reward;
-        document.querySelector("#questionform").penalty.value =
+        document.querySelector("#question-form").penalty.value =
           realGrid.grid[realIndex].question.penalty;
       } else {
-        document.querySelector("#questionform").question.value = "";
-        document.querySelector("#questionform").answer1.value = "";
-        document.querySelector("#questionform").answer2.value = "";
-        document.querySelector("#questionform").answer3.value = "";
-        document.querySelector("#questionform").answer4.value = "";
-        document.querySelector("#questionform").correctAnswer.value = "";
-        document.querySelector("#questionform").penalty.value = "";
-        document.querySelector("#questionform").reward.value = "";
+        document.querySelector("#question-form").question.value = "";
+        document.querySelector("#question-form").answer1.value = "";
+        document.querySelector("#question-form").answer2.value = "";
+        document.querySelector("#question-form").answer3.value = "";
+        document.querySelector("#question-form").answer4.value = "";
+        document.querySelector("#question-form").correctAnswer.value = "";
+        document.querySelector("#question-form").penalty.value = "";
+        document.querySelector("#question-form").reward.value = "";
       }
-      for (i = 0; i < 64; i++) {
-        let newSquare = document.querySelector(`#square-${i}`);
-        if (newSquare.className == "edit-square" && i != realIndex) {
-          if (realGrid.grid[i].question == null) {
-            newSquare.className = "empty-square";
-          } else {
-            newSquare.className = "square-question";
-          }
+      const allSquares = document.querySelectorAll("td");
+      for (const square of allSquares) {
+        const squareVal = +square.id.split("-")[1];
+        if (realGrid.grid[squareVal - 1].question == null) {
+          square.className = "empty-square";
+        } else {
+          square.className = "square-question";
         }
       }
-    } else {
     }
   };
 
@@ -101,40 +103,45 @@ async function fullEditForm(name) {
             realGrid.grid[i].question = question;
           }
         }
-        e.target.question.value = "";
-        e.target.answer1.value = "";
-        e.target.answer2.value = "";
-        e.target.answer3.value = "";
-        e.target.answer4.value = "";
-        e.target.correctAnswer.value = "";
-        e.target.squaretoedit.value = "";
-        e.target.penalty.value = "";
-        e.target.reward.value = "";
+        questionForm.question.value = "";
+        questionForm.answer1.value = "";
+        questionForm.answer2.value = "";
+        questionForm.answer3.value = "";
+        questionForm.answer4.value = "";
+        questionForm.correctAnswer.value = "";
+        questionForm.squaretoedit.value = "";
+        questionForm.penalty.value = "";
+        questionForm.reward.value = "";
         changeSquareColour();
         alert("Question added");
       } else {
         throw "Error: One of the answers must match the correct answer";
       }
-    } catch (f) {
-      alert(f);
+    } catch (e) {
+      console.log(e)
+      alert(e);
     }
   };
 
-  const resetQuestion = () => {
-    for (let i = 0; i < 64; i++) {
-      let newSquare = document.querySelector(`#square-${i}`);
-      if (newSquare.className == "edit-square") {
-        realGrid.grid[i].question = null;
-        newSquare.className = "empty-square";
-      }
-    }
-  };
+  function resetQuestion() {
+    const squareNumInput =
+      document.querySelector("#question-form").squaretoedit;
+    const editSquareVal = squareNumInput.value;
+    const editSquare = document.querySelector(`#square-${editSquareVal}`);
 
-  async function createNewGrid(e) {
-    e.preventDefault();
+    realGrid.grid[editSquareVal - 1].question = null;
+    editSquare.className = "empty-square";
+  }
+
+  async function createNewGrid() {
+    const boardNameInput = document.querySelector("#board-name");
+    if (!boardNameInput.value) {
+      alert("Give your board a name before you can create a new board")
+      return
+    }
 
     const data = {
-      name: e.target.boardname.value.toLowerCase(),
+      name: boardNameInput.value,
       grid: realGrid.grid,
     };
 
@@ -152,30 +159,28 @@ async function fullEditForm(name) {
     );
 
     if (response.status == 201) {
-      e.target.boardname.value = "";
+      boardNameInput.value = "";
       alert("Grid added.");
       location.reload();
     }
   }
 
-  const questionForm = document.querySelector("#questionform");
+  const questionForm = document.querySelector("#question-form");
   questionForm.addEventListener("submit", createQuestion);
   questionForm.addEventListener("reset", resetQuestion);
 
-  const gridForm = document.querySelector("#gridform");
-  gridForm.addEventListener("submit", createNewGrid);
-
-  let editSquare = document.getElementsByName("squaretoedit")[0];
-  editSquare.addEventListener("keyup", changeSquareColour);
+  const saveButton = document.querySelector("#save-grid");
+  saveButton.addEventListener("click", createNewGrid);
 
   const makeAGrid = () => {
     editSquare.value = "";
     generateRandomGrid();
   };
 
-  const resetGrid = () => {
+  const resetGrid = (e) => {
+    if (!confirm("You're about to reset the grid")) return;
     for (let i = 0; i < 64; i++) {
-      let newSquare = document.querySelector(`#square-${i}`);
+      let newSquare = document.querySelector(`#square-${i+1}`);
       if (newSquare.className == "square-question") {
         realGrid.grid[i].question = null;
         newSquare.className = "empty-square";
@@ -213,10 +218,10 @@ async function fullEditForm(name) {
     return filled;
   };
 
-  let randomGridButton = document.querySelector("#randomgridgenerator");
+  let randomGridButton = document.querySelector("#random-grid-generator");
   randomGridButton.addEventListener("click", makeAGrid);
 
-  let resetGridButton = document.querySelector("#resetgrid");
+  let resetGridButton = document.querySelector("#reset-grid");
   resetGridButton.addEventListener("click", resetGrid);
 
   async function generateRandomGrid() {
@@ -339,9 +344,62 @@ async function fetchGridData(name) {
   }
 }
 
-const displayGrid = (grid) => {
+function fillInputsForSquareNum(squareNum) {
+  const index = squareNum - 1;
+  const alreadyHasData = !!realGrid.grid[index].question;
+  if (alreadyHasData) {
+    document.querySelector("#question-form").question.value =
+      realGrid.grid[index].question.question;
+    document.querySelector("#question-form").answer1.value =
+      realGrid.grid[index].question.answers[0];
+    document.querySelector("#question-form").answer2.value =
+      realGrid.grid[index].question.answers[1];
+    document.querySelector("#question-form").answer3.value =
+      realGrid.grid[index].question.answers[2];
+    document.querySelector("#question-form").answer4.value =
+      realGrid.grid[index].question.answers[3];
+    let idx = realGrid.grid[index].question.correctAnswerIndex;
+    document.querySelector("#question-form").correctAnswer.value =
+      realGrid.grid[index].question.answers[idx];
+    document.querySelector("#question-form").reward.value =
+      realGrid.grid[index].question.reward;
+    document.querySelector("#question-form").penalty.value =
+      realGrid.grid[index].question.penalty;
+  }
+}
+
+function formatSquareBeingModified(e) {
+  e.preventDefault();
+  const squareNumInput = document.querySelector("#question-form").squaretoedit;
+  const allSquares = document.querySelectorAll("td");
+
+  const squareNumValue = squareNumInput.value;
+  for (const square of allSquares) {
+    const squareNum = square.id.split("-")[1];
+
+    square.style.borderColor =
+      +squareNum === +squareNumValue ? "goldenrod" : "#362419";
+  }
+
+  fillInputsForSquareNum(squareNumValue);
+}
+document
+  .querySelector("#question-form")
+  .squaretoedit.addEventListener("change", formatSquareBeingModified);
+
+function changeSquareBeingModified(e) {
+  e.preventDefault();
+  const squareElem = e.target;
+  const clickedSquareNum = squareElem.id.split("-")[1];
+  const squareNumInput = document.querySelector("#question-form").squaretoedit;
+  squareNumInput.value = clickedSquareNum;
+}
+
+const boardContainer = document.getElementById("board-grid-container");
+
+function displayGrid(grid) {
   const table = document.createElement("table");
-  section.appendChild(table);
+  boardContainer.appendChild(table);
   for (i = 7; i >= 0; i--) {
     let row = document.createElement("tr");
     row.id = "row-" + i.toString();
@@ -349,8 +407,10 @@ const displayGrid = (grid) => {
   }
   for (i = grid.grid.length - 1; i >= 0; i--) {
     let td = document.createElement("td");
-    td.textContent = grid.grid[i].index + 1;
-    td.id = "square-" + grid.grid[i].index;
+    td.innerHTML = `<div>${grid.grid[i].index + 1}</div>`;
+    td.id = "square-" + (grid.grid[i].index + 1);
+    td.addEventListener("click", changeSquareBeingModified);
+    td.addEventListener("click", formatSquareBeingModified);
     if (grid.grid[i].question != null) {
       td.classList.add("square-question");
     } else {
@@ -363,7 +423,7 @@ const displayGrid = (grid) => {
       document.getElementById("row-" + rowNumber).prepend(td);
     }
   }
-};
+}
 
 class Question {
   constructor(question, answers, correctAnswerIndex, reward, penalty) {
@@ -375,20 +435,30 @@ class Question {
   }
 }
 
+const dropdownMenu = document.getElementById("board-select");
+dropdownMenu.addEventListener("change", (e) => {
+  e.preventDefault();
+  window.location.hash = e.target.value;
+  location.reload();
+});
+
 async function createDropdownMenu() {
   try {
     const gridData = await fetch(
       `https://historical-snakes-and-ladders-api.onrender.com/grids/names`
     );
     if (gridData.ok) {
-      const data = await gridData.json();
-      let dropdownMenu = document.querySelector(".dropdown-content");
-      for (i = 0; i < data.length; i++) {
-        let menuItem = document.createElement("a");
-        menuItem.textContent = data[i];
-        menuItem.href = `edit-pages.html#${data[i]}`;
-        dropdownMenu.appendChild(menuItem);
-        menuItem.addEventListener("click", goToPage);
+      const boardNames = await gridData.json();
+      const currentBoard = window.location.hash.slice(1).replace("%20", " ");
+
+      for (const name of boardNames) {
+        let option = document.createElement("option");
+        option.value = name;
+        option.innerHTML = name;
+        if (currentBoard == name) {
+          option.selected = true;
+        }
+        dropdownMenu.appendChild(option);
       }
     } else {
       throw "Something went wrong with the API request";
@@ -398,24 +468,6 @@ async function createDropdownMenu() {
   }
 }
 
-const goToPage = (e) => {
-  window.location = e.target.href;
-  location.reload();
-};
+const mainMenuButton = document.querySelector("#main-menu");
+mainMenuButton.addEventListener("click", () => window.location = "index.html");
 
-const goToMenu = () => {
-  window.location = "index.html";
-};
-
-const mainMenuButton = document.querySelector("#mainmenu");
-mainMenuButton.addEventListener("click", goToMenu);
-
-//A little bit of code for the game-setup.html page
-const buttons = document.querySelectorAll(".boards button");
-
-buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    buttons.forEach((btn) => btn.classList.remove("clicked"));
-    button.classList.add("clicked");
-  });
-});
