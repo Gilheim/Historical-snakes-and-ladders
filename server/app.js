@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const fetch = require("node-fetch");
 const logger = require("./logger");
 const app = express();
 const grids = require("./grids.json");
