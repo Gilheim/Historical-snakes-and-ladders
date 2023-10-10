@@ -251,10 +251,8 @@ function checkAndLoadQuestion() {
   const playerCurrentSquare = playerObj.currentSquare;
   const boardInfoElems = boardInfo.grid;
 
-  console.log(boardInfoElems);
   const triviaObj = boardInfoElems[playerCurrentSquare - 1];
 
-  console.log(triviaObj);
   if (!triviaObj) {
     //update the current player next to throw the dice
     currentPlayer = (currentPlayer + 1) % players.length;
@@ -268,7 +266,12 @@ function checkAndLoadQuestion() {
 
   createQuestionPopUp(triviaObj);
 
-  if (boardName == "Random History Trivia") boardInfo.grid.splice(playerCurrentSquare - 1, 1);
+  if (boardName == "Random History Trivia") {
+    square = document.getElementById(`square-${playerCurrentSquare}`);
+    square.style.backgroundImage = `url("/client/assets/images/cream-coloured-wood-texture.jpg")`
+    console.log(square)
+    boardInfo.grid.splice(playerCurrentSquare - 1, 1, null)
+  };
 }
 
 const pageBody = document.body;
