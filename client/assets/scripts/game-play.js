@@ -111,7 +111,7 @@ async function createPlayerHTMLElements() {
 
     //add dedicated image to board piece div
     const boardPieceImage = document.createElement("img");
-    boardPieceImage.src = `./../assets/images/board-pieces/${playerId}.png`;
+    boardPieceImage.src = `/client/assets/images/board-pieces/${playerId}.png`;
     boardPieceImage.alt = `player ${i + 1}'s board piece`;
 
     playerDiv.appendChild(boardPieceImage);
@@ -149,7 +149,7 @@ function updatePlayerStatus() {
 
     //add dedicated image to cell
     const boardPieceImage = document.createElement("img");
-    boardPieceImage.src = `./../assets/images/board-pieces/${playerObj.id}.png`;
+    boardPieceImage.src = `/client/assets/images/board-pieces/${playerObj.id}.png`;
     boardPieceImage.alt = `${playerObj.name}'s board piece image`;
     pieceImageCell.appendChild(boardPieceImage);
     playerRow.appendChild(pieceImageCell);
@@ -211,7 +211,7 @@ async function throwDice() {
 
   //create dice image element
   const image = document.createElement("img");
-  image.src = `./../assets/images/dice/${randValue1to6}.svg`;
+  image.src = `/client/assets/images/dice/${randValue1to6}.svg`;
   image.alt = `value of ${randValue1to6} on die`;
 
   await new Promise((resolve) => setTimeout(resolve, 1000));

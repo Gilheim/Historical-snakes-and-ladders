@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./assets/game-setup.js" defer></script>
-    <link rel="stylesheet" href="./assets/game-setup.css">
+    <script src="./assets/scripts/game-setup.js" defer></script>
+    <link rel="stylesheet" href="./assets/styles/game-setup.css">
     <title>Game Setup</title>
 </head>
 <body>
-    <form id="player-form" action="/client/game-play/index.html">
+    <form id="player-form" action="game-play.html">
         <h1>Select A Board To Play On</h1>
         <div class="boards"></div>
         <div id="player-name-inputs">
@@ -20,6 +20,6 @@
             <button class="submit" type="submit">Start game</button>
         </div>
     </form>
-    <button id="main-menu" onclick="window.location.href='/client/main-menu.html';">Go Back To Main Menu</button>
+    <button id="main-menu" onclick="window.location.href='main-menu.html';">Go Back To Main Menu</button>
 </body>
 </html>
