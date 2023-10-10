@@ -22,11 +22,11 @@ body {
 }
 
 .player-name {
-  margin: 6px 10px;
-  padding: 5px;
-  font-size: 0.9vw;
+  margin: 0.3vw;
+  padding: 0.3vw;
+  font-size: 1.2vw;
   border-style: groove;
-  border-width: 5px;
+  border-width: 0.3vw;
   border-color: black;
 }
 
@@ -46,17 +46,14 @@ h1 {
   background-size: cover;
   color: #fff;
   text-align: center;
-  font-size: 1.3vw;
-  height: 7vh;
+  font-size: 1.5vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px;
-  padding: 0 1vw;
+  padding: 0.5vw;
   margin-bottom: 1.3vh;
-  border-radius: 5px;
   border-color: #362419;
-  border-width: 10px;
+  border-width: 0.5vw;
   border-style: groove;
 }
 .boards {
@@ -68,7 +65,7 @@ h1 {
 }
 
 #board-option {
-  margin: 10px;
+  margin: 0.3vw;
   position: relative;
   display: grid;
   place-items: center;
@@ -83,8 +80,7 @@ h1 {
   font-size: 1.1vw;
   color: #fff;
 
-  border-radius: 5px;
-  border-width: 5px;
+  border-width: 0.25vw;
 }
 
 #board-option:has(input[type="radio"]:checked) {
@@ -103,7 +99,7 @@ h1 {
 
 #board-option label {
   text-align: center;
-  margin: 15px;
+  margin: 0.1vw;
 }
 
 #main-menu,
@@ -120,11 +116,10 @@ h1 {
   cursor: pointer;
   padding: 0.6vw;
   min-width: 13vw;
-  border-radius: 10px;
-  margin: 10px;
-  border-radius: 5px;
+  border-radius: 0.3vw;
+  margin: 0.3vw;
   border-color: #362419;
-  border-width: 10px;
+  border-width: 0.3vw;
   border-style: groove;
 }
 
@@ -139,8 +134,12 @@ h1 {
 #board-option,
 .submit,
 #main-menu {
-  border-width: 5px;
+  border-width: 0.25vw;
   border-style: outset;
+}
+
+#board-option {
+  border-width: 0.4vw;
 }
 
 .submit:hover,
