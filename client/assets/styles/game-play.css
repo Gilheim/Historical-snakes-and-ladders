@@ -20,7 +20,6 @@ body {
   display: grid;
   margin: 4vh 4vh;
   width: 80%;
-  max-width: 1000px;
   grid-template-columns: 1.3fr 1fr;
   column-gap: 1.2vw;
 }
