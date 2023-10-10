@@ -60,10 +60,10 @@ app.post("/grids", (req, res) => {
   res.status(201).send(newGrid);
 });
 
-app.get("/200questions", async (req, res) => {
+app.get("/random", async (req, res) => {
   const triviaArr = [];
   try {
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 2; i++) {
       const resp = await fetch(
         `https://opentdb.com/api.php?amount=50&category=23&type=multiple`
       );
@@ -104,8 +104,8 @@ app.get("/200questions", async (req, res) => {
   }
 
   const boardData = {
-    name: "200questions",
-    grid: reconfiguredArr,
+    name: "random",
+    grid: reconfiguredArr.slice(0,64),
   };
 
   if (reconfiguredArr.length) {

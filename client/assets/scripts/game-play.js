@@ -35,7 +35,7 @@ async function fetchGrid() {
     let data;
     if (boardName == "Random History Trivia") {
       gridData = await fetch(
-        `https://historical-snakes-and-ladders-api.onrender.com/200questions`
+        `https://historical-snakes-and-ladders-api.onrender.com/random`
       );
       data = await gridData.json();
     } else {
@@ -78,7 +78,6 @@ async function createPlayersAndBoard() {
     players.push(playerObj);
   }
 
-  console.log(playerNames);
   await fetchGrid();
   colorSquares();
 }

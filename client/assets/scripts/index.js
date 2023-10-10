@@ -97,7 +97,6 @@ async function fullEditForm(name) {
           rewardNumber,
           penaltyNumber
         );
-        console.log(question);
         for (let i = 0; i < realGrid.grid.length; i++) {
           if (squareNumberIndex === i) {
             realGrid.grid[i].question = question;
