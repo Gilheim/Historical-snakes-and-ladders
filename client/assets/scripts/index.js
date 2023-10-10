@@ -376,7 +376,7 @@ const goToPage = (e) => {
 }
 
 const goToMenu = () => {
-    window.location ="main-menu.html"
+    window.location ="index.html"
 }
 
 const mainMenuButton = document.querySelector("#mainmenu")
