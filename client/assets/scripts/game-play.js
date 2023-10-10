@@ -117,7 +117,7 @@ async function createPlayerHTMLElements() {
 
     //add dedicated image to board piece div
     const boardPieceImage = document.createElement("img");
-    boardPieceImage.src = `/client/assets/images/board-pieces/${playerId}.png`;
+    boardPieceImage.src = `/assets/images/board-pieces/${playerId}.png`;
     boardPieceImage.alt = `player ${i + 1}'s board piece`;
 
     playerDiv.appendChild(boardPieceImage);
@@ -155,7 +155,7 @@ function updatePlayerStatus() {
 
     //add dedicated image to cell
     const boardPieceImage = document.createElement("img");
-    boardPieceImage.src = `/client/assets/images/board-pieces/${playerObj.id}.png`;
+    boardPieceImage.src = `/assets/images/board-pieces/${playerObj.id}.png`;
     boardPieceImage.alt = `${playerObj.name}'s board piece image`;
     pieceImageCell.appendChild(boardPieceImage);
     playerRow.appendChild(pieceImageCell);
@@ -217,7 +217,7 @@ async function throwDice() {
 
   //create dice image element
   const image = document.createElement("img");
-  image.src = `/client/assets/images/dice/${randValue1to6}.svg`;
+  image.src = `/assets/images/dice/${randValue1to6}.svg`;
   image.alt = `value of ${randValue1to6} on die`;
 
   await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -274,7 +274,7 @@ function checkAndLoadQuestion() {
 
   if (boardName == "Random History Trivia") {
     square = document.getElementById(`square-${playerCurrentSquare}`);
-    square.style.backgroundImage = `url("/client/assets/images/cream-coloured-wood-texture.jpg")`;
+    square.style.backgroundImage = `url("/assets/images/cream-coloured-wood-texture.jpg")`;
     console.log(square);
     boardInfo.grid.splice(playerCurrentSquare - 1, 1, null);
   }
@@ -405,6 +405,6 @@ async function checkForWinner() {
     updateGameMessage(`${player.name} has won ${boardName}`);
     boardInfo = {};
     await new Promise((resolve) => setTimeout(resolve, 3000));
-    window.location.href = "/client/game-setup.html";
+    window.location.href = "game-setup.html";
   }
 }

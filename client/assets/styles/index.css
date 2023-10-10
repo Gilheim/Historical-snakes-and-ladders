@@ -8,24 +8,24 @@ body {
   margin: 0;
   min-height: 100vh;
   display: grid;
-  background-image: url("/client/assets/images/history-wallpaper.png");
+  background-image: url("/assets/images/history-wallpaper.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-  
+
 /* Edit Board */
 .empty-square {
-    font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
-    border-color: black;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    border: 2px solid;
+  font-family: "Franklin Gothic Medium", "Arial", Arial, sans-serif;
+  border-color: black;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: 2px solid;
 }
 
 .square-question {
-  font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial", Arial, sans-serif;
   border-color: black;
   width: 40px;
   height: 40px;
@@ -39,17 +39,17 @@ body {
   flex-direction: column;
 }
 
-#form-buttons{
+#form-buttons {
   display: flex;
 }
 
 #gridform {
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
 .edit-square {
-  font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial", Arial, sans-serif;
   border-color: black;
   width: 40px;
   height: 40px;
@@ -58,23 +58,22 @@ body {
   background-color: turquoise;
 }
 
-#formcontainer{
-  display:flex;
+#formcontainer {
+  display: flex;
   flex-direction: column;
 }
 
-#board-and-form{
-  display: flex ;
+#board-and-form {
+  display: flex;
 }
 
-
 #editpage {
-  display: inline-block
+  display: inline-block;
 }
 
 /* Dropdown Button */
 .dropbtn {
-  background-image: url("/client/assets/images/wood-background.jpg");
+  background-image: url("/assets/images/wood-background.jpg");
   color: #ffff;
   display: inline-flex;
   justify-content: center;
@@ -84,8 +83,6 @@ body {
   height: 50px;
   border-radius: 10px;
   border: groove #362419 5px;
- 
-
 }
 
 .dropbtn:hover {
@@ -108,27 +105,32 @@ body {
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  background-image: url("/client/assets/images/wood-background.jpg");
+  background-image: url("/assets/images/wood-background.jpg");
   font-size: 14px;
   color: #ffff;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 100px;
-    height: 42px;
-    border-radius: 10px;
-    border: groove #362419 5px;
-    margin-left: 10px;
-    text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 100px;
+  height: 42px;
+  border-radius: 10px;
+  border: groove #362419 5px;
+  margin-left: 10px;
+  text-decoration: none;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {color: red;}
+.dropdown-content a:hover {
+  color: red;
+}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: inline-block;}
+.dropdown:hover .dropdown-content {
+  display: inline-block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
-
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}

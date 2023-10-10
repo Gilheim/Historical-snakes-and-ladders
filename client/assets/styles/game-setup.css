@@ -5,7 +5,7 @@
 }
 
 body {
-  background-image: url("/client/assets/images/history-wallpaper.png");
+  background-image: url("/assets/images/history-wallpaper.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,7 +18,7 @@ body {
 }
 
 #player-form {
-    max-width: 65vw;
+  max-width: 65vw;
 }
 
 .player-name {
@@ -40,7 +40,7 @@ body {
 }
 
 h1 {
-  background-image: url("/client/assets/images/wood-background.jpg");
+  background-image: url("/assets/images/wood-background.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -72,7 +72,7 @@ h1 {
   width: 8vw;
   height: 8vw;
 
-  background-image: url("/client/assets/images/wood-background.jpg");
+  background-image: url("/assets/images/wood-background.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -106,7 +106,7 @@ h1 {
 .submit {
   place-self: center;
   display: inline-block;
-  background-image: url("/client/assets/images/wood-background.jpg");
+  background-image: url("/assets/images/wood-background.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

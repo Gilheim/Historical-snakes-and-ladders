@@ -1,89 +1,89 @@
 body {
-    background-image: url("/client/assets/images/history-wallpaper.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: row;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    padding: 25px 0;
-  }
-
-  #formcontainer {
-    background-image: url("/client/assets/images/wood-background.jpg");
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 40px 15px 0px 45px;
-    border: groove #362419 10px;
-    border-radius: 5px;
-    width: 367px;
-  }
-
-  #formcontainer form {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  #formcontainer form:last-child {
-    margin-bottom: 0;
-  }
-
-  #formcontainer label {
-    color: white;
-  }
-
-  #formcontainer label,
-  #formcontainer input,
-  #formcontainer button {
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-.Input{
-    margin: 5px 19px 5px 19px;
-    width: 290px;
-    height: 36px;
-    border-radius: 5px;
-    border: none;
+  background-image: url("/assets/images/history-wallpaper.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  padding: 25px 0;
 }
 
-.add-button{
-    background-color: #29B840;
-    color: #ffff;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 140px;
-    height: 36px;
-    border-radius: 10px;
-    border: none;
-    margin-top: 10px;
-    margin-right: 5px;
-    margin-left: 22px;
+#formcontainer {
+  background-image: url("/assets/images/wood-background.jpg");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 40px 15px 0px 45px;
+  border: groove #362419 10px;
+  border-radius: 5px;
+  width: 367px;
 }
 
-.reset-button{
-    background-color: #E22C2C;
-    color: #ffff;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 140px;
-    height: 36px;
-    margin-top: 10px;
-    border-radius: 10px;
-    border: none;
+#formcontainer form {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#formcontainer form:last-child {
+  margin-bottom: 0;
+}
+
+#formcontainer label {
+  color: white;
+}
+
+#formcontainer label,
+#formcontainer input,
+#formcontainer button {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.Input {
+  margin: 5px 19px 5px 19px;
+  width: 290px;
+  height: 36px;
+  border-radius: 5px;
+  border: none;
+}
+
+.add-button {
+  background-color: #29b840;
+  color: #ffff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 140px;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+  margin-right: 5px;
+  margin-left: 22px;
+}
+
+.reset-button {
+  background-color: #e22c2c;
+  color: #ffff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 140px;
+  height: 36px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
 }
 
 .save {
-  background-image: url("/client/assets/images/wood-background.jpg");
+  background-image: url("/assets/images/wood-background.jpg");
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -100,44 +100,44 @@ body {
   color: red;
 }
 
-#randomgridgenerator{
-  background-image: url("/client/assets/images/wood-background.jpg");
-    color: #ffff;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 108px;
-    height: 50px;
-    border-radius: 10px;
-    border: groove #362419 5px;
-    margin-right: 5px;
-    margin-bottom: 2px;
+#randomgridgenerator {
+  background-image: url("/assets/images/wood-background.jpg");
+  color: #ffff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 108px;
+  height: 50px;
+  border-radius: 10px;
+  border: groove #362419 5px;
+  margin-right: 5px;
+  margin-bottom: 2px;
 }
 
 #randomgridgenerator:hover {
   color: red;
 }
 
-#resetgrid{
-  background-image: url("/client/assets/images/wood-background.jpg");
+#resetgrid {
+  background-image: url("/assets/images/wood-background.jpg");
   color: #ffff;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 108px;
-    height: 50px;
-    border-radius: 10px;
-    border: groove #362419 5px;
-    margin-left: 5px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 108px;
+  height: 50px;
+  border-radius: 10px;
+  border: groove #362419 5px;
+  margin-left: 5px;
 }
 #resetgrid:hover {
   color: red;
 }
 
-#mainmenu{
-  background-image: url("/client/assets/images/wood-background.jpg");
+#mainmenu {
+  background-image: url("/assets/images/wood-background.jpg");
   color: #ffff;
   display: inline-flex;
   justify-content: center;
@@ -157,7 +157,7 @@ body {
 }
 
 table {
-  background-image: url("/client/assets/images/wood-background.jpg");
+  background-image: url("/assets/images/wood-background.jpg");
   width: 800px;
   height: 1000px;
   margin: 40px 0px 23px 25px;
@@ -167,4 +167,3 @@ table {
   border-collapse: collapse;
   margin-bottom: 0px;
 }
-

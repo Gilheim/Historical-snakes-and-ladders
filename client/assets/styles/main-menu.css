@@ -5,7 +5,7 @@
 }
 
 body {
-  background-image: url("/client/assets/images/history-wallpaper.png");
+  background-image: url("/assets/images/history-wallpaper.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -19,7 +19,7 @@ body {
 
 .button,
 h1 {
-  background-image: url("/client/assets/images/wood-background.jpg");
+  background-image: url("/assets/images/wood-background.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -83,4 +83,3 @@ section {
 #create-board:hover {
   border-style: inset;
 }
-
