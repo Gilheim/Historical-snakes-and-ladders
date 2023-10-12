@@ -13,6 +13,7 @@
         <div id="board-name-container">
           <label for="board-name">Board Name</label>
           <input
+          size="16"
             id="board-name"
             type="text"
             placeholder="Barbara Liskov board"
@@ -82,10 +83,10 @@
               />
             </div>
             <div id="form-options">
-              <button type="submit" name="add-to-grid" id="add-button">
-                Add to grid
-              </button>
               <button type="reset" class="reset-button">Reset</button>
+              <button type="submit" name="add-to-grid" id="add-button">
+                Save Entry
+              </button>
             </div>
           </div>
         </form>
@@ -93,9 +94,9 @@
           <button id="main-menu" onclick="window.location.href='index.html';">
             Main Menu
           </button>
-          <button id="random-grid-generator">Random Grid</button>
-          <button id="reset-grid">Reset Grid</button>
-          <button id="save-grid">Save Grid</button>
+          <button id="random-grid-generator">Add Random</button>
+          <button id="reset-grid">Reset Board</button>
+          <button id="save-grid">Create Board</button>
         </div>
       </div>
       <div id="board-grid-container"></div>
