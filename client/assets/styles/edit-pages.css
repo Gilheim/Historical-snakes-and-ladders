@@ -17,9 +17,10 @@ main {
   display: grid;
   place-items: center;
   grid-auto-flow: column;
+  grid-template-columns: min-content 1fr;
   margin: 4vh 4vh;
   column-gap: 1.2vw;
-  width: 86%;
+  width: 84%;
 }
 
 select,
