@@ -135,8 +135,8 @@ h1 {
   position: relative;
   display: grid;
   place-items: center;
-  width: 7vw;
-  height: 7vw;
+  width: 6.8vw;
+  height: 6.8vw;
 
   background-image: url("/assets/images/wood-background.jpg");
   background-position: center;

@@ -1,6 +1,7 @@
-window.onload = () => {
-  let realGridName = window.location.hash.substr(1) || "blank grid";
-  fullEditForm(realGridName);
+window.onload = async () => {
+  let realGridName =
+    window.location.hash.slice(1).replaceAll("%20", " ") || "Blank Board";
+  await fullEditForm(realGridName);
   createDropdownMenu();
 };
 
@@ -18,8 +19,8 @@ async function fullEditForm(name) {
     let squareIndex = parseInt(editSquare.value);
     if (editSquare.value == "") {
       for (i = 0; i < 64; i++) {
-        let newSquare = document.querySelector(`#square-${i+1}`);
-        if (realGrid.grid[i].question == null) {
+        let newSquare = document.querySelector(`#square-${i + 1}`);
+        if (realGrid.grid[i] == null) {
           newSquare.className = "empty-square";
         } else {
           newSquare.className = "square-question";
@@ -29,24 +30,24 @@ async function fullEditForm(name) {
       let realIndex = squareIndex;
       let square = document.querySelector(`#square-${realIndex}`);
       square.className = "edit-square";
-      if (realGrid.grid[realIndex].question != null) {
+      if (realGrid.grid[realIndex] != null) {
         document.querySelector("#question-form").question.value =
-          realGrid.grid[realIndex].question.question;
+          realGrid.grid[realIndex].question;
         document.querySelector("#question-form").answer1.value =
-          realGrid.grid[realIndex].question.answers[0];
+          realGrid.grid[realIndex].answers[0];
         document.querySelector("#question-form").answer2.value =
-          realGrid.grid[realIndex].question.answers[1];
+          realGrid.grid[realIndex].answers[1];
         document.querySelector("#question-form").answer3.value =
-          realGrid.grid[realIndex].question.answers[2];
+          realGrid.grid[realIndex].answers[2];
         document.querySelector("#question-form").answer4.value =
-          realGrid.grid[realIndex].question.answers[3];
-        let idx = realGrid.grid[realIndex].question.correctAnswerIndex;
+          realGrid.grid[realIndex].answers[3];
+        let idx = realGrid.grid[realIndex].correctAnswerIndex;
         document.querySelector("#question-form").correctAnswer.value =
-          realGrid.grid[realIndex].question.answers[idx];
+          realGrid.grid[realIndex].answers[idx];
         document.querySelector("#question-form").reward.value =
-          realGrid.grid[realIndex].question.reward;
+          realGrid.grid[realIndex].reward;
         document.querySelector("#question-form").penalty.value =
-          realGrid.grid[realIndex].question.penalty;
+          realGrid.grid[realIndex].penalty;
       } else {
         document.querySelector("#question-form").question.value = "";
         document.querySelector("#question-form").answer1.value = "";
@@ -60,7 +61,7 @@ async function fullEditForm(name) {
       const allSquares = document.querySelectorAll("td");
       for (const square of allSquares) {
         const squareVal = +square.id.split("-")[1];
-        if (realGrid.grid[squareVal - 1].question == null) {
+        if (realGrid.grid[squareVal - 1] == null) {
           square.className = "empty-square";
         } else {
           square.className = "square-question";
@@ -99,7 +100,7 @@ async function fullEditForm(name) {
         );
         for (let i = 0; i < realGrid.grid.length; i++) {
           if (squareNumberIndex === i) {
-            realGrid.grid[i].question = question;
+            realGrid.grid[i] = question;
           }
         }
         questionForm.question.value = "";
@@ -117,7 +118,7 @@ async function fullEditForm(name) {
         throw "Error: One of the answers must match the correct answer";
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
       alert(e);
     }
   };
@@ -128,19 +129,24 @@ async function fullEditForm(name) {
     const editSquareVal = squareNumInput.value;
     const editSquare = document.querySelector(`#square-${editSquareVal}`);
 
-    realGrid.grid[editSquareVal - 1].question = null;
+    realGrid.grid[editSquareVal - 1] = null;
     editSquare.className = "empty-square";
   }
 
   async function createNewGrid() {
     const boardNameInput = document.querySelector("#board-name");
-    if (!boardNameInput.value) {
-      alert("Give your board a name before you can create a new board")
-      return
+    const boardName = boardNameInput.value.trim().replace(/\s+/g, " ");
+    if (!boardName) {
+      alert("Your board requires a name before it can be saved");
+      return;
+    }
+    if (!/^[a-zA-Z\s]+$/g.test(boardName)) {
+      alert("Your board name can only have letters and spaces");
+      return;
     }
 
     const data = {
-      name: boardNameInput.value,
+      name: boardName,
       grid: realGrid.grid,
     };
 
@@ -159,7 +165,7 @@ async function fullEditForm(name) {
 
     if (response.status == 201) {
       boardNameInput.value = "";
-      alert("Grid added.");
+      alert("Board Created!");
       location.reload();
     }
   }
@@ -179,9 +185,9 @@ async function fullEditForm(name) {
   const resetGrid = (e) => {
     if (!confirm("You're about to reset the grid")) return;
     for (let i = 0; i < 64; i++) {
-      let newSquare = document.querySelector(`#square-${i+1}`);
+      let newSquare = document.querySelector(`#square-${i + 1}`);
       if (newSquare.className == "square-question") {
-        realGrid.grid[i].question = null;
+        realGrid.grid[i] = null;
         newSquare.className = "empty-square";
       }
     }
@@ -191,7 +197,7 @@ async function fullEditForm(name) {
     let arrNumbers = whichSquaresEmpty(realGrid, []);
     let randomIndex = Math.floor(Math.random() * arrNumbers.length);
     let randomNumber = arrNumbers[randomIndex];
-    if (realGrid.grid[randomNumber].question == null) {
+    if (realGrid.grid[randomNumber] == null) {
       return randomNumber;
     } else {
       return randomNumberNotUsed();
@@ -200,7 +206,7 @@ async function fullEditForm(name) {
 
   const whichSquaresEmpty = (grid, arr) => {
     for (let i = 0; i < 64; i++) {
-      if (grid.grid[i].question == null) {
+      if (grid.grid[i] == null) {
         arr.push(i);
       }
     }
@@ -210,7 +216,7 @@ async function fullEditForm(name) {
   const checkEverySquare = () => {
     let filled = true;
     for (let i = 0; i < 64; i++) {
-      if (realGrid.grid[i].question == null) {
+      if (realGrid.grid[i] == null) {
         filled = false;
       }
     }
@@ -254,7 +260,7 @@ async function fullEditForm(name) {
               penalty
             );
             let randomNumber = randomNumberNotUsed();
-            realGrid.grid[randomNumber].question = actualQuestion;
+            realGrid.grid[randomNumber] = actualQuestion;
             changeSquareColour();
           }
         }
@@ -318,7 +324,7 @@ async function fetchGrid(name) {
     );
     if (gridData.ok) {
       const data = await gridData.json();
-      displayGrid(data);
+      displayBoard(data);
     } else {
       throw "Something went wrong with the API request";
     }
@@ -345,25 +351,25 @@ async function fetchGridData(name) {
 
 function fillInputsForSquareNum(squareNum) {
   const index = squareNum - 1;
-  const alreadyHasData = !!realGrid.grid[index].question;
+  const alreadyHasData = !!realGrid.grid[index];
   if (alreadyHasData) {
     document.querySelector("#question-form").question.value =
-      realGrid.grid[index].question.question;
+      realGrid.grid[index].question;
     document.querySelector("#question-form").answer1.value =
-      realGrid.grid[index].question.answers[0];
+      realGrid.grid[index].answers[0] ?? "";
     document.querySelector("#question-form").answer2.value =
-      realGrid.grid[index].question.answers[1];
+      realGrid.grid[index].answers[1] ?? "";
     document.querySelector("#question-form").answer3.value =
-      realGrid.grid[index].question.answers[2];
+      realGrid.grid[index].answers[2] ?? "";
     document.querySelector("#question-form").answer4.value =
-      realGrid.grid[index].question.answers[3];
-    let idx = realGrid.grid[index].question.correctAnswerIndex;
+      realGrid.grid[index].answers[3] ?? "";
+    let idx = realGrid.grid[index].correctAnswerIndex;
     document.querySelector("#question-form").correctAnswer.value =
-      realGrid.grid[index].question.answers[idx];
+      realGrid.grid[index].answers[idx];
     document.querySelector("#question-form").reward.value =
-      realGrid.grid[index].question.reward;
+      realGrid.grid[index].reward;
     document.querySelector("#question-form").penalty.value =
-      realGrid.grid[index].question.penalty;
+      realGrid.grid[index].penalty;
   }
 }
 
@@ -396,7 +402,7 @@ function changeSquareBeingModified(e) {
 
 const boardContainer = document.getElementById("board-grid-container");
 
-function displayGrid(grid) {
+function displayBoard(board) {
   const table = document.createElement("table");
   boardContainer.appendChild(table);
   for (i = 7; i >= 0; i--) {
@@ -404,13 +410,13 @@ function displayGrid(grid) {
     row.id = "row-" + i.toString();
     table.appendChild(row);
   }
-  for (i = grid.grid.length - 1; i >= 0; i--) {
+  for (i = board.grid.length - 1; i >= 0; i--) {
     let td = document.createElement("td");
-    td.innerHTML = `<div>${grid.grid[i].index + 1}</div>`;
-    td.id = "square-" + (grid.grid[i].index + 1);
+    td.innerHTML = `<div>${i + 1}</div>`;
+    td.id = "square-" + (i + 1);
     td.addEventListener("click", changeSquareBeingModified);
     td.addEventListener("click", formatSquareBeingModified);
-    if (grid.grid[i].question != null) {
+    if (board.grid[i] != null) {
       td.classList.add("square-question");
     } else {
       td.classList.add("empty-square");
@@ -448,7 +454,7 @@ async function createDropdownMenu() {
     );
     if (gridData.ok) {
       const boardNames = await gridData.json();
-      const currentBoard = window.location.hash.slice(1).replace("%20", " ");
+      const currentBoard = window.location.hash.slice(1).replaceAll("%20", " ");
 
       for (const name of boardNames) {
         let option = document.createElement("option");
@@ -468,5 +474,7 @@ async function createDropdownMenu() {
 }
 
 const mainMenuButton = document.querySelector("#main-menu");
-mainMenuButton.addEventListener("click", () => window.location = "index.html");
-
+mainMenuButton.addEventListener(
+  "click",
+  () => (window.location = "index.html")
+);

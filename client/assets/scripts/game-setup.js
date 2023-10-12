@@ -4,11 +4,11 @@ window.onload = () => {
 
 document.getElementById("main-menu").addEventListener("click", (e) => {
   e.preventDefault();
-  window.location.href='index.html';
+  window.location.href = "index.html";
 });
 document.getElementById("edit-page").addEventListener("click", (e) => {
   e.preventDefault();
-  window.location.href = 'edit-pages.html';
+  window.location.href = "edit-pages.html";
 });
 
 async function loadBoardOptions() {

@@ -43,14 +43,10 @@ async function fetchGrid() {
         `https://historical-snakes-and-ladders-api.onrender.com/grids/${boardName}`
       );
       data = await gridData.json();
-      //remove all board info objects with out question data
-      data.grid = data.grid.map((boardInfoElem) =>
-        boardInfoElem.question ? boardInfoElem.question : null
-      );
     }
     boardInfo = data;
   } catch (e) {
-    console.log(e);
+    console.err(e);
   }
 }
 
@@ -188,12 +184,16 @@ async function colorSquares() {
 
   if (!imageURLs) return;
 
-  const allSquares = document.getElementById("board-grid").querySelectorAll("td");
+  const allSquares = document
+    .getElementById("board-grid")
+    .querySelectorAll("td");
   for (const square of allSquares) {
     const squareVal = +square.id.split("-")[1];
-      square.style.backgroundImage = boardInfo.grid[squareVal - 1] ? `linear-gradient(rgba(255,252,201, 0.7),rgba(255,252,201, 0.7)), url('${
-        imageURLs[squareVal - 1]
-      }')` : `url("/assets/images/cream-coloured-wood-texture.jpg")`;
+    square.style.backgroundImage = boardInfo.grid[squareVal - 1]
+      ? `linear-gradient(rgba(255,252,201, 0.7),rgba(255,252,201, 0.7)), url('${
+          imageURLs[squareVal - 1]
+        }')`
+      : `url("/assets/images/cream-coloured-wood-texture.jpg")`;
   }
 }
 
@@ -288,6 +288,12 @@ function checkAndLoadQuestion() {
 
 const pageBody = document.body;
 
+function decodeHTMLEntities(text) {
+  var textArea = document.createElement("textarea");
+  textArea.innerHTML = text;
+  return textArea.value;
+}
+
 function createQuestionPopUp(questionObj) {
   const backdrop = document.createElement("div");
   backdrop.id = "question-backdrop";
@@ -303,7 +309,7 @@ function createQuestionPopUp(questionObj) {
 
   const question = document.createElement("div");
   question.id = "question";
-  question.innerHTML = `<h1>${questionObj.question}</h1>`;
+  question.innerHTML = `<h1>${decodeHTMLEntities(questionObj.question)}</h1>`;
   questionInnerContainer.appendChild(question);
 
   const answersContainer = document.createElement("div");
@@ -316,7 +322,7 @@ function createQuestionPopUp(questionObj) {
   for (let answer of questionObj.answers) {
     const questionAnswer = document.createElement("button");
     questionAnswer.id = "answer-button";
-    questionAnswer.textContent = answer;
+    questionAnswer.textContent = decodeHTMLEntities(answer);
     answersContainer.appendChild(questionAnswer);
   }
 

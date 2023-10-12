@@ -65,7 +65,7 @@ app.get("/random", async (req, res) => {
   try {
     for (let i = 0; i < 2; i++) {
       const resp = await fetch(
-        `https://opentdb.com/api.php?amount=50&category=23&type=multiple`
+        `https://opentdb.com/api.php?amount=50&category=23`
       );
       triviaArr.push(...(await resp.json()).results);
     }
