@@ -31,8 +31,8 @@ body {
 
 #end-game {
   position: absolute;
-  margin: 0.3vw;
-  font-size: 0.8vw;
+  margin: 0.2vw;
+  font-size: 0.7vw;
   color: white;
   cursor: pointer;
   border-width: 0.2vw !important;
@@ -127,10 +127,11 @@ body {
 }
 
 #side-panel {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 0.6fr;
   margin-right: 0;
-  padding: 2.6vw;
+  padding: 2vw;
   gap: 1vw;
 }
 
